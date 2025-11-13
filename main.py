@@ -467,15 +467,3 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("---")
-
-st.markdown("""
-<div style='text-align: center; padding: 30px;'>
-    <p style='font-size: 1.2rem; color: #00d4ff; margin-bottom: 15px;'>
-        &#128161; <strong>No más decisiones por rumores. Invierte con DATOS en cualquier mercado.</strong>
-    </p>
-    <p style='font-size: 1rem; color: #888; margin-top: 20px;'>
-        &copy; 2024 BQuant Finance | Financial Screener Masterclass<br>
-        Para más información: <strong style='color: #00ffaa;'>@Gsnchez</strong> | bquantfinance.com
-    </p>
-</div>
-""", unsafe_allow_html=True)
