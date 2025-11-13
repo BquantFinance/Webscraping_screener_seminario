@@ -272,7 +272,6 @@ st.markdown("<p style='font-size: 1.5rem; color: #00ffaa; margin-bottom: 30px;'>
 # CTA Button at the TOP - SUPER FLASHY!
 st.markdown("""
 <div style='text-align: center; margin: 40px 0 60px 0;'>
-    <p class='urgency-text'>&#9889;&#9889;&#9889; PLAZAS LIMITADAS &#9889;&#9889;&#9889;</p>
     <a href='https://bquantfinance.com/courses/seminario-scraping-screener/' target='_blank' class='cta-button'>
         &#128293; INSCRÍBETE AHORA &#128293;
     </a>
@@ -430,7 +429,6 @@ st.markdown("""
 # CTA Button BOTTOM - SUPER FLASHY!
 st.markdown("""
 <div style='text-align: center; margin: 60px 0;'>
-    <p class='urgency-text'>&#9889;&#9889;&#9889; PLAZAS LIMITADAS &#9889;&#9889;&#9889;</p>
     <a href='https://bquantfinance.com/courses/seminario-scraping-screener/' target='_blank' class='cta-button'>
         &#128293; INSCRÍBETE AHORA &#128293;
     </a>
