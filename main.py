@@ -120,6 +120,20 @@ st.markdown("""
         box-shadow: 0 8px 32px rgba(0, 255, 170, 0.2);
     }
     
+    /* Price tag */
+    .price-tag {
+        background: linear-gradient(135deg, #00d4ff 0%, #00ffaa 100%);
+        color: #000000;
+        padding: 30px 60px;
+        font-size: 3rem;
+        font-weight: 900;
+        border-radius: 20px;
+        text-align: center;
+        margin: 30px auto;
+        box-shadow: 0 10px 40px rgba(0, 212, 255, 0.5);
+        display: inline-block;
+    }
+    
     /* CTA Button */
     .cta-button {
         background: linear-gradient(135deg, #00d4ff 0%, #00ffaa 100%);
@@ -251,13 +265,14 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown("""
     <div class='highlight-box'>
-        <h3>📡 Web Scraping Avanzado</h3>
+        <h3>📡 Web Scraping de Datos Financieros</h3>
         <ul>
-            <li>Extracción de datos financieros de múltiples fuentes</li>
-            <li>APIs de mercados (TradingView, Yahoo Finance, etc.)</li>
-            <li>Manejo de rate limits y proxies</li>
-            <li>Automatización de scraping con scheduling</li>
-            <li>Limpieza y normalización de datos</li>
+            <li>Extracción masiva de datos desde APIs financieras</li>
+            <li>Técnicas de scraping a gran escala</li>
+            <li>Manejo de peticiones, headers y autenticación</li>
+            <li>Procesamiento y limpieza de datos financieros</li>
+            <li>Construcción de pipelines ETL automatizados</li>
+            <li>Almacenamiento eficiente en DataFrames</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -265,13 +280,14 @@ with col1:
 with col2:
     st.markdown("""
     <div class='highlight-box'>
-        <h3>🔍 Stock Screening Profesional</h3>
+        <h3>🔍 Construcción de Screeners Avanzados</h3>
         <ul>
-            <li>Construcción de filtros multi-criterio</li>
-            <li>Análisis fundamental automatizado</li>
-            <li>Indicadores técnicos avanzados</li>
-            <li>Sistemas de scoring y ranking</li>
-            <li>Dashboard interactivo con Streamlit</li>
+            <li>Arquitectura de screeners profesionales</li>
+            <li>Filtros multi-criterio y combinaciones lógicas</li>
+            <li>Sistemas de scoring y ranking personalizados</li>
+            <li>Backtesting de estrategias de screening</li>
+            <li>Dashboards interactivos con visualizaciones</li>
+            <li>Exportación y reporting automatizado</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -513,7 +529,7 @@ with col1:
             <li>Scripts de scraping documentados</li>
             <li>Pipeline ETL profesional</li>
             <li>Notebooks Jupyter explicativos</li>
-            <li>Configuraciones de APIs</li>
+            <li>Código modular y reutilizable</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -527,7 +543,7 @@ with col2:
             <li>Templates de screeners</li>
             <li>Funciones de análisis</li>
             <li>Sistema de backtesting</li>
-            <li>Alertas automatizadas</li>
+            <li>Módulos de visualización</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -541,7 +557,7 @@ with col3:
             <li>Estrategias de screening</li>
             <li>Casos de estudio reales</li>
             <li>Best practices</li>
-            <li>Troubleshooting guide</li>
+            <li>Grabación del seminario</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -618,7 +634,7 @@ with col2:
         </ul>
         <h3 style='margin-top: 30px;'>🚀 Nivel:</h3>
         <p style='color: #ffffff;'>Intermedio - Avanzado<br>
-        <strong style='color: #00ffaa;'>6-8 horas de contenido + ejercicios prácticos</strong></p>
+        <strong style='color: #00ffaa;'>3 horas intensivas + material complementario</strong></p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -629,35 +645,43 @@ st.markdown("## ⚡ Ventaja Competitiva")
 st.markdown("""
 <div style='background: linear-gradient(135deg, rgba(255, 0, 100, 0.1) 0%, rgba(255, 200, 0, 0.1) 100%); 
             border-radius: 20px; padding: 40px; margin: 30px 0; border: 2px solid rgba(255, 100, 0, 0.3);'>
-    <h3 style='text-align: center; color: #ff6b6b; font-size: 2rem;'>Screeners Gratuitos vs Este Curso</h3>
+    <h3 style='text-align: center; color: #ff6b6b; font-size: 2rem;'>Screeners Online vs Tu Propio Sistema</h3>
     <br>
     <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;'>
         <div>
-            <h4 style='color: #ff6b6b;'>❌ Screeners Típicos:</h4>
+            <h4 style='color: #ff6b6b;'>❌ Screeners Online:</h4>
             <ul style='color: #ffffff;'>
-                <li>500-1,000 acciones (solo USA)</li>
-                <li>20-50 métricas básicas</li>
-                <li>Sin control sobre los datos</li>
-                <li>Limitaciones de la plataforma</li>
-                <li>Sin personalización</li>
-                <li>Caja negra (no sabes cómo funciona)</li>
+                <li>Datos limitados (500-3,000 acciones)</li>
+                <li>20-80 métricas predefinidas</li>
+                <li>Sin acceso a datos históricos completos</li>
+                <li>Dependes de sus actualizaciones</li>
+                <li>Sin personalización avanzada</li>
+                <li>Suscripciones mensuales de 30-200€/mes</li>
+                <li>Caja negra (no controlas la lógica)</li>
+                <li>Límites de búsquedas diarias</li>
             </ul>
         </div>
         <div>
-            <h4 style='color: #00ffaa;'>✅ Este Curso:</h4>
+            <h4 style='color: #00ffaa;'>✅ Tu Propio Sistema:</h4>
             <ul style='color: #ffffff;'>
-                <li><strong style='color: #00ffaa;'>58,168 acciones</strong> (64 mercados)</li>
+                <li><strong style='color: #00ffaa;'>58,168 acciones</strong> globales</li>
                 <li><strong style='color: #00ffaa;'>982 métricas</strong> por acción</li>
-                <li><strong style='color: #00ffaa;'>Control total</strong> de tus datos</li>
+                <li><strong style='color: #00ffaa;'>Control total</strong> del dataset</li>
+                <li><strong style='color: #00ffaa;'>Actualizas</strong> cuando quieras</li>
                 <li><strong style='color: #00ffaa;'>Personalización ilimitada</strong></li>
-                <li><strong style='color: #00ffaa;'>Aprendes el proceso completo</strong></li>
-                <li><strong style='color: #00ffaa;'>Código open source</strong> y modular</li>
+                <li><strong style='color: #00ffaa;'>Pago único</strong> - tuyo para siempre</li>
+                <li><strong style='color: #00ffaa;'>Código abierto</strong> - modificable</li>
+                <li><strong style='color: #00ffaa;'>Sin límites</strong> de uso</li>
             </ul>
         </div>
     </div>
     <h3 style='text-align: center; color: #00d4ff; margin-top: 40px; font-size: 2.5rem;'>
-        🚀 58x más acciones | 32x más métricas
+        🚀 10-20x más acciones | 12-50x más métricas | Libertad Total
     </h3>
+    <p style='text-align: center; color: #ffffff; font-size: 1.3rem; margin-top: 20px;'>
+        En lugar de pagar 30-50€/mes indefinidamente, inviertes una vez<br>
+        y obtienes un sistema profesional que puedes usar para siempre
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -757,52 +781,90 @@ st.markdown("""
     </p>
     <p style='font-size: 1.3rem; color: #00d4ff; margin: 40px 0;'>
         ✓ No más decisiones por intuición<br>
-        ✓ No más limites de plataformas<br>
+        ✓ No más dependencia de plataformas<br>
         ✓ Control total sobre tus herramientas
     </p>
 </div>
 """, unsafe_allow_html=True)
 
-# Contact Section
+# Pricing Section
 st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("## 📧 Información del Seminario")
+st.markdown("## 💰 Información y Precio")
 
-col1, col2 = st.columns(2)
+col1, col2 = st.columns([1, 1])
 
 with col1:
     st.markdown("""
     <div class='highlight-box'>
-        <h3>📋 Detalles:</h3>
-        <p style='color: #ffffff; font-size: 1.1rem;'>
-        <strong style='color: #00ffaa;'>Duración:</strong> 6-8 horas + ejercicios<br>
-        <strong style='color: #00ffaa;'>Formato:</strong> Online / Presencial<br>
-        <strong style='color: #00ffaa;'>Nivel:</strong> Intermedio-Avanzado<br>
-        <strong style='color: #00ffaa;'>Idioma:</strong> Español<br>
-        <strong style='color: #00ffaa;'>Incluye:</strong> Código + Datos + Soporte
+        <h3>📋 Detalles del Seminario:</h3>
+        <p style='color: #ffffff; font-size: 1.2rem; line-height: 2;'>
+        <strong style='color: #00ffaa;'>⏱️ Duración:</strong> 3 horas intensivas<br>
+        <strong style='color: #00ffaa;'>📹 Formato:</strong> Online vía Zoom<br>
+        <strong style='color: #00ffaa;'>🎥 Grabación:</strong> Incluida (acceso ilimitado)<br>
+        <strong style='color: #00ffaa;'>📚 Material:</strong> Código + Datos + Documentación<br>
+        <strong style='color: #00ffaa;'>🔧 Nivel:</strong> Intermedio-Avanzado<br>
+        <strong style='color: #00ffaa;'>🗣️ Idioma:</strong> Español
         </p>
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
     st.markdown("""
-    <div class='highlight-box'>
-        <h3>👨‍💻 Instructor:</h3>
-        <p style='color: #ffffff; font-size: 1.1rem;'>
-        <strong style='color: #00ffaa;'>@Gsnchez</strong><br>
-        Quantitative Finance Professional<br>
-        📚 bquantfinance.com<br>
-        📧 BQuant Fund Lab (Substack)<br>
-        🎓 Master of Finance & Banking
+    <div class='highlight-box' style='text-align: center; padding: 50px 20px;'>
+        <h3 style='color: #00d4ff; margin-bottom: 30px;'>💎 Inversión Única</h3>
+        <div class='price-tag'>
+            89€
+        </div>
+        <p style='color: #ffffff; font-size: 1.2rem; margin-top: 30px;'>
+        <strong style='color: #00ffaa;'>Incluye:</strong><br>
+        ✓ Acceso al seminario en vivo<br>
+        ✓ Grabación para siempre<br>
+        ✓ Todo el código fuente<br>
+        ✓ Base de datos completa<br>
+        ✓ Documentación técnica<br>
+        ✓ Casos prácticos<br>
+        ✓ Templates y herramientas
         </p>
     </div>
     """, unsafe_allow_html=True)
+
+# Contact Section
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+st.markdown("## 📧 Sobre el Instructor")
+
+st.markdown("""
+<div class='highlight-box'>
+    <div style='display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center;'>
+        <div style='text-align: center;'>
+            <div style='width: 150px; height: 150px; margin: 0 auto; background: linear-gradient(135deg, #00d4ff, #00ffaa); 
+                        border-radius: 50%; display: flex; align-items: center; justify-content: center;'>
+                <span style='font-size: 4rem;'>👨‍💻</span>
+            </div>
+            <h3 style='color: #00d4ff; margin-top: 20px;'>@Gsnchez</h3>
+        </div>
+        <div>
+            <p style='color: #ffffff; font-size: 1.2rem; line-height: 1.8;'>
+            <strong style='color: #00ffaa;'>Quantitative Finance Professional</strong><br><br>
+            Especializado en análisis cuantitativo y desarrollo de herramientas financieras.<br>
+            Creador de <strong style='color: #00d4ff;'>bquantfinance.com</strong> y del newsletter 
+            <strong style='color: #00d4ff;'>BQuant Fund Lab</strong>.<br><br>
+            Docente en programas de Master of Finance & Banking, enfocado en la aplicación práctica 
+            de Python para análisis financiero y trading cuantitativo.
+            </p>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # Footer
 st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center; padding: 40px; color: #666;'>
-    <p style='font-size: 1.2rem; color: #00d4ff;'>
+    <p style='font-size: 1.3rem; color: #00d4ff; margin-bottom: 20px;'>
         💡 <strong>Deja de invertir por rumores. Invierte con DATOS.</strong>
+    </p>
+    <p style='font-size: 1.1rem; color: #00ffaa; margin-bottom: 30px;'>
+        🎯 Construye tu propio sistema de análisis profesional en 3 horas
     </p>
     <p style='margin-top: 20px; color: #888;'>
         © 2024 BQuant Finance | Stock Screener Masterclass
