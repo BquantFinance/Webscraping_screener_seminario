@@ -274,7 +274,7 @@ st.markdown("""
 <div style='text-align: center; margin: 40px 0 60px 0;'>
     <p class='urgency-text'>&#9889;&#9889;&#9889; PLAZAS LIMITADAS &#9889;&#9889;&#9889;</p>
     <a href='https://bquantfinance.com/courses/seminario-scraping-screener/' target='_blank' class='cta-button'>
-        &#128293;&#128293; INSCRÍBETE AHORA &#128293;&#128293;
+        &#128293; INSCRÍBETE AHORA &#128293;
     </a>
 </div>
 """, unsafe_allow_html=True)
@@ -434,7 +434,7 @@ st.markdown("""
 <div style='text-align: center; margin: 60px 0;'>
     <p class='urgency-text'>&#9889;&#9889;&#9889; PLAZAS LIMITADAS &#9889;&#9889;&#9889;</p>
     <a href='https://bquantfinance.com/courses/seminario-scraping-screener/' target='_blank' class='cta-button'>
-        &#128293;&#128293; INSCRÍBETE AHORA &#128293;&#128293;
+        &#128293; INSCRÍBETE AHORA &#128293;
     </a>
     <p class='urgency-text' style='margin-top: 20px;'>&#9201; Última oportunidad</p>
 </div>
