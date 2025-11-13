@@ -89,18 +89,55 @@ st.markdown("""
     }
     
     .price-section {
-        background: linear-gradient(135deg, #00d4ff, #00ffaa);
+        background: linear-gradient(135deg, #00f5ff 0%, #00ffaa 25%, #00f5ff 50%, #00ffaa 75%, #00f5ff 100%);
+        background-size: 300% 300%;
         border-radius: 25px;
         padding: 50px;
         margin: 60px 0 40px 0;
         text-align: center;
+        animation: gradient-flow 4s ease infinite;
+        box-shadow: 0 0 40px rgba(0, 255, 170, 0.6), 0 0 80px rgba(0, 245, 255, 0.4);
+        border: 3px solid rgba(0, 255, 255, 0.8);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .price-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        animation: shine 3s infinite;
+    }
+    
+    @keyframes gradient-flow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes shine {
+        0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
     }
     
     .price-amount {
-        font-size: 5rem;
+        font-size: 6rem;
         font-weight: 900;
         color: #000000;
         margin: 20px 0;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        animation: scale-pulse 2s ease-in-out infinite;
+        position: relative;
+        z-index: 1;
+    }
+    
+    @keyframes scale-pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
     }
     
     .price-label {
@@ -108,6 +145,8 @@ st.markdown("""
         font-weight: 700;
         color: #000000;
         margin-bottom: 30px;
+        position: relative;
+        z-index: 1;
     }
     
     .benefit-box {
@@ -139,53 +178,89 @@ st.markdown("""
     
     .cta-button {
         display: block;
-        background: linear-gradient(135deg, #ff6b00, #ffaa00, #ff6b00);
-        background-size: 200% 200%;
-        color: #000000;
-        font-size: 2rem;
+        background: linear-gradient(135deg, #ff0080, #ff8c00, #ff0080);
+        background-size: 300% 300%;
+        color: #ffffff;
+        font-size: 2.5rem;
         font-weight: 900;
         text-align: center;
-        padding: 30px 60px;
-        border-radius: 50px;
+        padding: 35px 70px;
+        border-radius: 60px;
         text-decoration: none;
         margin: 50px auto;
-        max-width: 600px;
-        box-shadow: 0 15px 50px rgba(255, 170, 0, 0.5);
-        animation: gradient-shift 3s ease infinite, pulse 2s ease-in-out infinite;
-        border: 3px solid #ffaa00;
+        max-width: 700px;
+        box-shadow: 0 0 30px rgba(255, 0, 128, 0.6), 0 0 60px rgba(255, 140, 0, 0.4), 0 15px 50px rgba(255, 0, 128, 0.5);
+        animation: button-glow 3s ease infinite, button-float 3s ease-in-out infinite;
+        border: 4px solid #ffffff;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        animation: slide-shine 2s infinite;
+    }
+    
+    @keyframes slide-shine {
+        0% { left: -100%; }
+        100% { left: 100%; }
     }
     
     .cta-button:hover {
-        transform: scale(1.05) translateY(-5px);
-        box-shadow: 0 20px 60px rgba(255, 170, 0, 0.8);
+        transform: scale(1.08) translateY(-8px);
+        box-shadow: 0 0 50px rgba(255, 0, 128, 0.9), 0 0 100px rgba(255, 140, 0, 0.7), 0 20px 70px rgba(255, 0, 128, 0.8);
         text-decoration: none;
-        color: #000000;
+        color: #ffffff;
     }
     
-    @keyframes gradient-shift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    @keyframes button-glow {
+        0%, 100% { 
+            box-shadow: 0 0 30px rgba(255, 0, 128, 0.6), 0 0 60px rgba(255, 140, 0, 0.4), 0 15px 50px rgba(255, 0, 128, 0.5);
+            background-position: 0% 50%;
+        }
+        50% { 
+            box-shadow: 0 0 50px rgba(255, 0, 128, 0.9), 0 0 100px rgba(255, 140, 0, 0.7), 0 15px 70px rgba(255, 0, 128, 0.8);
+            background-position: 100% 50%;
+        }
     }
     
-    @keyframes pulse {
-        0%, 100% { box-shadow: 0 15px 50px rgba(255, 170, 0, 0.5); }
-        50% { box-shadow: 0 15px 70px rgba(255, 170, 0, 0.9); }
+    @keyframes button-float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
     }
     
     .urgency-text {
         text-align: center;
-        font-size: 1.3rem;
-        color: #ffaa00;
-        font-weight: 700;
+        font-size: 1.5rem;
+        color: #ff0080;
+        font-weight: 900;
         margin: 20px 0;
-        animation: blink 2s ease-in-out infinite;
+        animation: blink-urgent 1.5s ease-in-out infinite;
+        text-shadow: 0 0 20px rgba(255, 0, 128, 0.8);
     }
     
-    @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.6; }
+    @keyframes blink-urgent {
+        0%, 100% { 
+            opacity: 1; 
+            transform: scale(1);
+        }
+        50% { 
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+    }
+    
+    .includes-list {
+        position: relative;
+        z-index: 1;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -293,7 +368,7 @@ with col5:
             Sin personalización<br>
             Caja negra<br><br>
             <span style='font-size: 1.5rem; font-weight: 800; color: #ff6b6b;'>
-                160€/mes = 1,920€/año
+                XX€/mes
             </span>
         </div>
     </div>
@@ -329,30 +404,57 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Price Section
+# Price Section - NUEVO DISEÑO MÁS FLASHY
 st.markdown("""
 <div class='price-section'>
     <div class='price-label'>INVERSIÓN ÚNICA</div>
     <div class='price-amount'>89€</div>
-    <div style='font-size: 1.3rem; color: #000000; font-weight: 600; margin-top: 20px;'>
+    <div class='includes-list' style='font-size: 1.3rem; color: #000000; font-weight: 600; margin-top: 20px;'>
         &#9989; 3 horas de seminario en vivo (Zoom)<br>
         &#9989; Grabación con acceso ilimitado<br>
         &#9989; 4 bases de datos completas (162K+ instrumentos)<br>
         &#9989; Todo el código fuente documentado<br>
         &#9989; Pipeline ETL profesional<br>
-        &#9989; 15 casos prácticos resueltos<br>
         &#9989; Soporte 30 días
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# CTA Button - FLASHY!
+# CTA Button - SUPER FLASHY!
 st.markdown("""
 <div style='text-align: center; margin: 60px 0;'>
-    <p class='urgency-text'>&#9889; PLAZAS LIMITADAS &#9889;</p>
+    <p class='urgency-text'>&#9889;&#9889;&#9889; PLAZAS LIMITADAS &#9889;&#9889;&#9889;</p>
     <a href='https://bquantfinance.com/courses/seminario-scraping-screener/' target='_blank' class='cta-button'>
-        &#128293; INSCRÍBETE AHORA &#128293;
+        &#128293;&#128293; INSCRÍBETE AHORA &#128293;&#128293;
     </a>
-    <p class='urgency-text' style='margin-top: 20px;'>&#128197; Próxima fecha disponible</p>
+    <p class='urgency-text' style='margin-top: 20px;'>&#9201; Última oportunidad</p>
+</div>
+""", unsafe_allow_html=True)
+
+# Extra flashy reminder
+st.markdown("""
+<div style='text-align: center; margin: 40px 0; padding: 40px; background: linear-gradient(135deg, rgba(255, 0, 128, 0.2), rgba(255, 140, 0, 0.2)); border-radius: 20px; border: 2px solid #ff0080; box-shadow: 0 0 30px rgba(255, 0, 128, 0.4);'>
+    <p style='font-size: 2rem; font-weight: 900; color: #ff0080; margin-bottom: 15px; text-shadow: 0 0 20px rgba(255, 0, 128, 0.6);'>
+        &#11088; NO PIERDAS ESTA OPORTUNIDAD &#11088;
+    </p>
+    <p style='font-size: 1.4rem; color: #ffffff; line-height: 1.8;'>
+        Construye tu propio sistema de screening profesional<br>
+        <span style='color: #00ffaa; font-weight: 800;'>162,985 instrumentos</span> &bull; 
+        <span style='color: #00d4ff; font-weight: 800;'>4 asset classes</span> &bull; 
+        <span style='color: #ffaa00; font-weight: 800;'>Control total</span><br><br>
+        <strong style='font-size: 1.8rem; color: #ff0080; text-shadow: 0 0 15px rgba(255, 0, 128, 0.8);'>Solo 89€</strong>
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+# Footer
+st.markdown("""
+<div style='text-align: center; margin: 50px 0; padding: 40px;'>
+    <p style='font-size: 1.5rem; color: #00d4ff; font-weight: 700;'>
+        &#128640; De análisis manual a sistema profesional en 3 horas
+    </p>
+    <p style='font-size: 1.1rem; color: #888; margin-top: 30px;'>
+        &copy; 2024 BQuant Finance | @Gsnchez | bquantfinance.com
+    </p>
 </div>
 """, unsafe_allow_html=True)
