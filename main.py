@@ -471,7 +471,7 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; padding: 30px;'>
     <p style='font-size: 1rem; color: #888; margin-top: 20px;'>
-        © 2026 BQuant Finance | Financial Screener Masterclass<br>
+         2026 BQuant Finance | Financial Screener Masterclass<br>
         Para más información: <strong style='color: #00ffaa;'>@Gsnchez</strong> | bquantfinance.com
     </p>
 </div>
