@@ -267,7 +267,18 @@ st.markdown("""
 
 # Header
 st.markdown("<h1>&#128640; FINANCIAL SCREENER MASTERCLASS</h1>", unsafe_allow_html=True)
-st.markdown("<p style='font-size: 1.5rem; color: #00ffaa; margin-bottom: 50px;'>Web Scraping + Stock Screening en Python | 3 Horas Intensivas</p>", unsafe_allow_html=True)
+st.markdown("<p style='font-size: 1.5rem; color: #00ffaa; margin-bottom: 30px;'>Web Scraping + Stock Screening en Python | 3 Horas Intensivas</p>", unsafe_allow_html=True)
+
+# CTA Button at the TOP - SUPER FLASHY!
+st.markdown("""
+<div style='text-align: center; margin: 40px 0 60px 0;'>
+    <p class='urgency-text'>&#9889;&#9889;&#9889; PLAZAS LIMITADAS &#9889;&#9889;&#9889;</p>
+    <a href='https://bquantfinance.com/courses/seminario-scraping-screener/' target='_blank' class='cta-button'>
+        &#128293;&#128293; INSCRÍBETE AHORA &#128293;&#128293;
+    </a>
+    <p class='urgency-text' style='margin-top: 20px;'>&#9201; Última oportunidad</p>
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("<h2>&#128202; Las 4 Bases de Datos</h2>", unsafe_allow_html=True)
 
@@ -368,7 +379,7 @@ with col5:
             Sin personalización<br>
             Caja negra<br><br>
             <span style='font-size: 1.5rem; font-weight: 800; color: #ff6b6b;'>
-                XX€/mes
+                160€/mes = 1,920€/año
             </span>
         </div>
     </div>
@@ -415,12 +426,13 @@ st.markdown("""
         &#9989; 4 bases de datos completas (162K+ instrumentos)<br>
         &#9989; Todo el código fuente documentado<br>
         &#9989; Pipeline ETL profesional<br>
+        &#9989; 15 casos prácticos resueltos<br>
         &#9989; Soporte 30 días
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# CTA Button - SUPER FLASHY!
+# CTA Button BOTTOM - SUPER FLASHY!
 st.markdown("""
 <div style='text-align: center; margin: 60px 0;'>
     <p class='urgency-text'>&#9889;&#9889;&#9889; PLAZAS LIMITADAS &#9889;&#9889;&#9889;</p>
