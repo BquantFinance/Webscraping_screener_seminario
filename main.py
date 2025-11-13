@@ -460,10 +460,10 @@ st.markdown("""
 st.markdown("""
 <div style='text-align: center; margin: 50px 0; padding: 40px;'>
     <p style='font-size: 1.5rem; color: #00d4ff; font-weight: 700;'>
-        &#128640; De análisis manual a sistema profesional en 3 horas
+        &#128640; De análisis manual a sistema automático.
     </p>
     <p style='font-size: 1.1rem; color: #888; margin-top: 30px;'>
-        &copy; 2024 BQuant Finance | @Gsnchez | bquantfinance.com
+        &copy; 2025 BQuantFinance | @Gsnchez | bquantfinance.com
     </p>
 </div>
 """, unsafe_allow_html=True)
