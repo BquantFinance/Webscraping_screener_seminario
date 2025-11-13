@@ -374,8 +374,6 @@ with col5:
         <div class='benefit-text' style='font-size: 1.2rem;'>
             500-5,000 instrumentos<br>
             20-80 métricas básicas<br>
-            Una sola asset class<br>
-            Sin personalización<br>
             Caja negra<br><br>
             <span style='font-size: 1.5rem; font-weight: 800; color: #ff6b6b;'>
                 XX€/mes
