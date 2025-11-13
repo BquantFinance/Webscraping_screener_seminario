@@ -446,24 +446,3 @@ st.markdown("""
 - Quieres crear **estrategias personalizadas** únicas en el mercado
 
 st.markdown("---")
-
-st.markdown("""
-<div style='text-align: center; padding: 50px 20px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 255, 170, 0.1)); border-radius: 15px; margin: 40px 0;'>
-    <h2 style='color: #00d4ff; font-size: 2.5rem; margin-bottom: 20px;'>
-        &#128640; Un Sistema Universal Para Todos los Mercados
-    </h2>
-    <p style='font-size: 1.3rem; color: #ffffff; line-height: 1.8; max-width: 900px; margin: 20px auto;'>
-        Deja de usar 4 plataformas diferentes que te cobran cada mes.<br>
-        Deja de analizar manualmente instrumentos con información fragmentada.<br><br>
-        Construye un sistema único que analiza:<br>
-        <strong style='color: #00d4ff;'>58,168 Stocks</strong> &bull; 
-        <strong style='color: #00ffaa;'>30,167 ETFs</strong> &bull; 
-        <strong style='color: #ffaa00;'>67,476 Crypto</strong> &bull; 
-        <strong style='color: #aa00ff;'>7,174 Forex</strong><br><br>
-        <strong style='color: #00d4ff;'>162,985 instrumentos totales. 4 asset classes. 1 solo sistema.</strong><br>
-        Control total. Personalización ilimitada. Tuyo para siempre.
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("---")
