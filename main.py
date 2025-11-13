@@ -1,40 +1,36 @@
 import streamlit as st
-import pandas as pd
 
 # Page configuration
 st.set_page_config(
-    page_title="Stock Screener Masterclass",
+    page_title="Stock Screener Masterclass - Web Scraping & Screening en Python",
     page_icon="📊",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
-# Custom CSS for dark mode and beautiful styling
+# Custom CSS for dark mode and clean styling
 st.markdown("""
 <style>
-    /* Main background and text */
     .stApp {
         background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
     }
     
-    /* Headers */
     h1 {
         color: #00d4ff;
         text-align: center;
-        font-size: 3.5rem !important;
+        font-size: 3rem !important;
         font-weight: 800 !important;
         text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        padding: 20px 0;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     }
     
     h2 {
         color: #00d4ff;
         font-size: 2rem !important;
         font-weight: 700 !important;
-        margin-top: 40px;
+        margin-top: 50px;
         margin-bottom: 20px;
-        border-bottom: 3px solid #00d4ff;
+        border-bottom: 2px solid #00d4ff;
         padding-bottom: 10px;
     }
     
@@ -42,832 +38,387 @@ st.markdown("""
         color: #00ffaa;
         font-size: 1.5rem !important;
         font-weight: 600 !important;
-        margin-top: 20px;
+        margin-top: 30px;
+        margin-bottom: 15px;
     }
     
-    /* Metric cards */
-    .metric-card {
-        background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 255, 170, 0.1) 100%);
-        border-radius: 15px;
-        padding: 25px;
-        margin: 15px 0;
-        border: 2px solid rgba(0, 212, 255, 0.3);
-        box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
-        transition: all 0.3s ease;
+    p, li {
+        color: #ffffff;
+        font-size: 1.1rem;
+        line-height: 1.8;
     }
     
-    .metric-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 40px rgba(0, 212, 255, 0.4);
-        border-color: rgba(0, 212, 255, 0.6);
+    .big-stat {
+        text-align: center;
+        padding: 20px;
+        margin: 10px;
+        background: rgba(0, 212, 255, 0.1);
+        border-radius: 10px;
+        border: 1px solid rgba(0, 212, 255, 0.3);
     }
     
-    .big-number {
-        font-size: 3rem;
+    .big-stat .number {
+        font-size: 2.5rem;
         font-weight: 800;
         color: #00d4ff;
-        text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        display: block;
     }
     
-    .metric-label {
-        font-size: 1.1rem;
+    .big-stat .label {
+        font-size: 1rem;
         color: #ffffff;
-        margin-top: 10px;
+        display: block;
+        margin-top: 5px;
     }
     
-    /* Feature boxes */
-    .feature-box {
-        background: rgba(0, 212, 255, 0.05);
-        border-left: 4px solid #00d4ff;
+    .highlight {
+        background: rgba(0, 255, 170, 0.1);
         padding: 20px;
-        margin: 15px 0;
-        border-radius: 8px;
-        backdrop-filter: blur(10px);
+        border-left: 4px solid #00ffaa;
+        margin: 20px 0;
+        border-radius: 5px;
     }
     
-    .feature-box:hover {
-        background: rgba(0, 212, 255, 0.1);
-        border-left-width: 6px;
+    .warning {
+        background: rgba(255, 100, 100, 0.1);
+        padding: 20px;
+        border-left: 4px solid #ff6b6b;
+        margin: 20px 0;
+        border-radius: 5px;
     }
     
-    /* Lists */
-    .stMarkdown ul {
-        list-style-type: none;
-        padding-left: 0;
-    }
-    
-    .stMarkdown li {
-        padding: 10px 0;
-        font-size: 1.1rem;
-        color: #ffffff;
-    }
-    
-    .stMarkdown li:before {
-        content: "✓ ";
-        color: #00ffaa;
-        font-weight: bold;
-        font-size: 1.3rem;
-        margin-right: 10px;
-    }
-    
-    /* Highlight boxes */
-    .highlight-box {
-        background: linear-gradient(135deg, rgba(0, 255, 170, 0.15) 0%, rgba(0, 212, 255, 0.15) 100%);
-        border-radius: 15px;
+    .price-box {
+        background: linear-gradient(135deg, #00d4ff, #00ffaa);
+        color: #000000;
         padding: 30px;
-        margin: 25px 0;
-        border: 2px solid rgba(0, 255, 170, 0.3);
-        box-shadow: 0 8px 32px rgba(0, 255, 170, 0.2);
+        border-radius: 15px;
+        text-align: center;
+        margin: 30px auto;
+        max-width: 400px;
     }
     
-    /* Price tag */
-    .price-tag {
-        background: linear-gradient(135deg, #00d4ff 0%, #00ffaa 100%);
-        color: #000000;
-        padding: 30px 60px;
-        font-size: 3rem;
+    .price-box .amount {
+        font-size: 4rem;
         font-weight: 900;
-        border-radius: 20px;
-        text-align: center;
-        margin: 30px auto;
-        box-shadow: 0 10px 40px rgba(0, 212, 255, 0.5);
-        display: inline-block;
     }
     
-    /* CTA Button */
-    .cta-button {
-        background: linear-gradient(135deg, #00d4ff 0%, #00ffaa 100%);
-        color: #000000;
-        padding: 20px 50px;
-        font-size: 1.5rem;
-        font-weight: 800;
-        border-radius: 50px;
-        border: none;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        margin: 30px auto;
-        cursor: pointer;
-        box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
-        transition: all 0.3s ease;
+    strong {
+        color: #00ffaa;
     }
     
-    .cta-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 50px rgba(0, 212, 255, 0.6);
+    ul {
+        margin: 15px 0;
     }
     
-    /* Stats grid */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        margin: 30px 0;
-    }
-    
-    /* Sidebar */
-    .css-1d391kg {
-        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
-    }
-    
-    /* Expander */
-    .streamlit-expanderHeader {
-        background: rgba(0, 212, 255, 0.1);
-        border-radius: 8px;
-        color: #00d4ff !important;
-        font-weight: 600;
-    }
-    
-    /* Divider */
     hr {
         border: none;
         height: 2px;
         background: linear-gradient(90deg, transparent, #00d4ff, transparent);
-        margin: 40px 0;
-    }
-    
-    /* Badge */
-    .badge {
-        display: inline-block;
-        padding: 8px 15px;
-        background: rgba(0, 212, 255, 0.2);
-        border: 1px solid #00d4ff;
-        border-radius: 20px;
-        color: #00d4ff;
-        font-weight: 600;
-        margin: 5px;
-        font-size: 0.9rem;
-    }
-    
-    /* Table styling */
-    .dataframe {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-        padding: 10px;
-    }
-    
-    /* Section divider */
-    .section-divider {
-        height: 3px;
-        background: linear-gradient(90deg, #00d4ff, #00ffaa, #00d4ff);
         margin: 50px 0;
-        border-radius: 3px;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Hero Section
-st.markdown("<h1>🚀 STOCK SCREENER MASTERCLASS</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; font-size: 1.5rem; color: #00ffaa; margin-bottom: 50px;'>Domina el Web Scraping y Stock Screening con Python</p>", unsafe_allow_html=True)
+# Header
+st.markdown("<h1>📊 STOCK SCREENER MASTERCLASS</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 1.3rem; color: #00ffaa; margin-bottom: 40px;'>Seminario Intensivo: Web Scraping y Stock Screening con Python</p>", unsafe_allow_html=True)
 
-# Key Stats Section
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+# Key numbers in a row
 col1, col2, col3, col4 = st.columns(4)
-
 with col1:
-    st.markdown("""
-    <div class='metric-card'>
-        <div class='big-number'>58,168</div>
-        <div class='metric-label'>Acciones Globales</div>
-    </div>
-    """, unsafe_allow_html=True)
-
+    st.markdown("<div class='big-stat'><span class='number'>58,168</span><span class='label'>Acciones</span></div>", unsafe_allow_html=True)
 with col2:
-    st.markdown("""
-    <div class='metric-card'>
-        <div class='big-number'>982</div>
-        <div class='metric-label'>Métricas por Acción</div>
-    </div>
-    """, unsafe_allow_html=True)
-
+    st.markdown("<div class='big-stat'><span class='number'>982</span><span class='label'>Métricas/Acción</span></div>", unsafe_allow_html=True)
 with col3:
-    st.markdown("""
-    <div class='metric-card'>
-        <div class='big-number'>64</div>
-        <div class='metric-label'>Mercados Cubiertos</div>
-    </div>
-    """, unsafe_allow_html=True)
-
+    st.markdown("<div class='big-stat'><span class='number'>64</span><span class='label'>Países</span></div>", unsafe_allow_html=True)
 with col4:
-    st.markdown("""
-    <div class='metric-card'>
-        <div class='big-number'>57M+</div>
-        <div class='metric-label'>Datos Totales</div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("<div class='big-stat'><span class='number'>90</span><span class='label'>Exchanges</span></div>", unsafe_allow_html=True)
 
-# About Section
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("## 🎯 ¿Qué Aprenderás?")
+st.markdown("---")
 
-col1, col2 = st.columns(2)
+# Main content
+st.markdown("""
+## 🎯 Sobre el Seminario
 
-with col1:
-    st.markdown("""
-    <div class='highlight-box'>
-        <h3>📡 Web Scraping de Datos Financieros</h3>
-        <ul>
-            <li>Extracción masiva de datos desde APIs financieras</li>
-            <li>Técnicas de scraping a gran escala</li>
-            <li>Manejo de peticiones, headers y autenticación</li>
-            <li>Procesamiento y limpieza de datos financieros</li>
-            <li>Construcción de pipelines ETL automatizados</li>
-            <li>Almacenamiento eficiente en DataFrames</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+En este seminario intensivo de **3 horas** aprenderás a construir tu propio sistema profesional de stock screening utilizando Python. Te enseñaré el proceso completo: desde la **extracción masiva de datos financieros mediante web scraping**, hasta la **construcción de screeners avanzados** con múltiples criterios de filtrado.
 
-with col2:
-    st.markdown("""
-    <div class='highlight-box'>
-        <h3>🔍 Construcción de Screeners Avanzados</h3>
-        <ul>
-            <li>Arquitectura de screeners profesionales</li>
-            <li>Filtros multi-criterio y combinaciones lógicas</li>
-            <li>Sistemas de scoring y ranking personalizados</li>
-            <li>Backtesting de estrategias de screening</li>
-            <li>Dashboards interactivos con visualizaciones</li>
-            <li>Exportación y reporting automatizado</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+No usaremos plataformas de terceros ni screeners online. Construirás tu **propia herramienta desde cero**, con control total sobre los datos y la lógica de filtrado. Al finalizar, tendrás acceso a una base de datos con **58,168 acciones** de **64 países** diferentes, cada una con **982 métricas** que incluyen análisis fundamental, técnico y métricas avanzadas de calidad.
 
-# Database Features
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("## 💎 La Base de Datos Más Completa")
+### 📚 ¿Qué Aprenderás Exactamente?
 
-tab1, tab2, tab3, tab4 = st.tabs(["📊 Análisis Fundamental", "📈 Análisis Técnico", "🎯 Métricas de Calidad", "🌍 Cobertura Global"])
+**Parte 1: Web Scraping de Datos Financieros (90 minutos)**
+- Extracción de datos desde APIs financieras: autenticación, headers, rate limiting
+- Técnicas de scraping a gran escala: cómo obtener datos de miles de acciones eficientemente
+- Procesamiento de respuestas JSON y manejo de errores en peticiones HTTP
+- Construcción de pipelines ETL: extracción, transformación y carga de datos
+- Limpieza y normalización de datos financieros para análisis
+- Estructuración en DataFrames de Pandas para análisis posterior
 
-with tab1:
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>Valoración (27 métricas)</h3>
-            <p>• P/E, P/B, P/S, P/FCF<br>
-            • EV/EBITDA, EV/Revenue<br>
-            • PEG Ratio<br>
-            • Graham Numbers<br>
-            • Precio vs Working Capital</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>Rentabilidad (38 métricas)</h3>
-            <p>• Márgenes (Neto, Operativo, Bruto)<br>
-            • ROE, ROA, ROIC, ROC<br>
-            • Return on Tangible Assets<br>
-            • EBITDA Margin<br>
-            • Pre-tax & After-tax Margin</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>Crecimiento (41 métricas)</h3>
-            <p>• YoY, QoQ en todas las líneas<br>
-            • CAGR 5 años<br>
-            • Crecimiento de EPS, Revenue, EBITDA<br>
-            • Free Cash Flow Growth<br>
-            • Capital Expenditures Growth</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>Solvencia (64 métricas)</h3>
-            <p>• Debt/Equity, Current Ratio, Quick Ratio<br>
-            • Interest Coverage<br>
-            • Altman Z-Score<br>
-            • Cash to Debt Ratios<br>
-            • Working Capital Analysis</p>
-        </div>
-        """, unsafe_allow_html=True)
+**Parte 2: Construcción de Screeners Profesionales (90 minutos)**
+- Arquitectura de un screener: diseño modular y escalable
+- Filtros simples y complejos: operadores lógicos (AND, OR, NOT)
+- Combinación de múltiples criterios: fundamental + técnico + calidad
+- Sistemas de scoring y ranking personalizados
+- Backtesting de estrategias de screening: validación histórica
+- Exportación de resultados y generación de reportes
 
-with tab2:
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>Moving Averages (66)</h3>
-            <p>• 33 SMA (2 a 300 períodos)<br>
-            • 33 EMA (2 a 300 períodos)<br>
-            • Golden Cross / Death Cross<br>
-            • Hull MA</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>Osciladores (50)</h3>
-            <p>• RSI (25 variaciones)<br>
-            • Stochastic (22 configs)<br>
-            • MACD (3 componentes)<br>
-            • CCI, Momentum, ROC</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>Trend & Volatility (75)</h3>
-            <p>• ADX (26 indicadores)<br>
-            • Ichimoku Cloud (8 líneas)<br>
-            • Bollinger Bands (6 configs)<br>
-            • ATR, Keltner, Donchian</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>Patrones (27)</h3>
-            <p>• Doji, Hammer, Engulfing<br>
-            • Morning/Evening Star<br>
-            • 3 White Soldiers<br>
-            • Harami, Shooting Star</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>Pivot Points (31)</h3>
-            <p>• Classic Pivots<br>
-            • Fibonacci Pivots<br>
-            • Woodie Pivots<br>
-            • Camarilla & Demark</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>Otros (35)</h3>
-            <p>• VWAP, VWMA<br>
-            • Aroon, Parabolic SAR<br>
-            • Chaikin Money Flow<br>
-            • Ultimate Oscillator</p>
-        </div>
-        """, unsafe_allow_html=True)
+## 💎 La Base de Datos
 
-with tab3:
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("""
-        <div class='highlight-box'>
-            <h3>🏆 Piotroski F-Score</h3>
-            <p style='color: #ffffff;'>Score de 0-9 que evalúa la fortaleza financiera de una empresa basándose en 9 criterios:</p>
-            <ul>
-                <li>Rentabilidad (ROA, Cash Flow, etc.)</li>
-                <li>Apalancamiento y Liquidez</li>
-                <li>Eficiencia Operativa</li>
-            </ul>
-            <p style='color: #00ffaa; font-weight: 600;'>Cobertura: 55.5% (FY) / 39.0% (TTM)</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='highlight-box'>
-            <h3>💀 Altman Z-Score</h3>
-            <p style='color: #ffffff;'>Predicción de riesgo de quiebra en los próximos 2 años:</p>
-            <ul>
-                <li>Z > 2.99: Zona Segura</li>
-                <li>1.81 < Z < 2.99: Zona Gris</li>
-                <li>Z < 1.81: Zona de Peligro</li>
-            </ul>
-            <p style='color: #00ffaa; font-weight: 600;'>Cobertura: 7.3% (FY) / 52.2% (TTM)</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class='highlight-box'>
-            <h3>✨ Sloan Ratio</h3>
-            <p style='color: #ffffff;'>Evalúa la calidad de los beneficios comparando accruals vs cash flow:</p>
-            <ul>
-                <li>Ratio negativo = Buenos beneficios</li>
-                <li>Ratio positivo alto = Alerta</li>
-                <li>Detecta manipulación contable</li>
-            </ul>
-            <p style='color: #00ffaa; font-weight: 600;'>Cobertura: 65.7% (FY) / 65.6% (TTM)</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='highlight-box'>
-            <h3>💰 Graham Numbers + Tobin's Q</h3>
-            <p style='color: #ffffff;'>Estimación de valor intrínseco y eficiencia de mercado:</p>
-            <ul>
-                <li>Graham Numbers: Valor justo según Benjamin Graham</li>
-                <li>Tobin's Q: Market Value vs Replacement Cost</li>
-                <li>Zmijewski Score: Distress financiero</li>
-            </ul>
-            <p style='color: #00ffaa; font-weight: 600;'>Cobertura: 43-66%</p>
-        </div>
-        """, unsafe_allow_html=True)
+Trabajarás con una base de datos profesional que contiene **58,168 acciones** distribuidas en **64 mercados** de todo el mundo. Son datos reales, actualizados, listos para usar.
 
-with tab4:
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>🌎 Mercados Principales</h3>
-            <p><span class='badge'>América: 13,041</span> <span class='badge'>India: 5,441</span><br>
-            <span class='badge'>Japón: 4,336</span> <span class='badge'>Canadá: 4,140</span><br>
-            <span class='badge'>Corea: 3,964</span> <span class='badge'>Taiwan: 2,602</span><br>
-            <span class='badge'>Hong Kong: 2,560</span> <span class='badge'>UK: 2,137</span></p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>💼 Capitalización de Mercado</h3>
-            <p>• Mega Cap (>$200B): <strong style='color: #00ffaa;'>386</strong><br>
-            • Large Cap ($10B-$200B): <strong style='color: #00ffaa;'>2,514</strong><br>
-            • Mid Cap ($2B-$10B): <strong style='color: #00ffaa;'>3,554</strong><br>
-            • Small Cap ($300M-$2B): <strong style='color: #00ffaa;'>7,602</strong><br>
-            • Micro Cap (<$300M): <strong style='color: #00ffaa;'>28,106</strong></p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>🏛️ Top Exchanges</h3>
-            <p><span class='badge'>TSE: 4,234</span> <span class='badge'>NASDAQ: 4,230</span><br>
-            <span class='badge'>KRX: 3,964</span> <span class='badge'>NSE: 2,989</span><br>
-            <span class='badge'>OTC: 2,881</span> <span class='badge'>AMEX: 2,738</span><br>
-            <span class='badge'>NYSE: 2,106</span> <span class='badge'>ASX: 2,087</span></p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='feature-box'>
-            <h3>🏢 Sectores Cubiertos</h3>
-            <p>• Finance: <strong style='color: #00ffaa;'>7,479</strong><br>
-            • Technology Services: <strong style='color: #00ffaa;'>3,653</strong><br>
-            • Producer Manufacturing: <strong style='color: #00ffaa;'>3,772</strong><br>
-            • Non-Energy Minerals: <strong style='color: #00ffaa;'>3,652</strong><br>
-            • Health Technology: <strong style='color: #00ffaa;'>3,091</strong><br>
-            • + 16 sectores más</p>
-        </div>
-        """, unsafe_allow_html=True)
+### 🌍 Cobertura Geográfica
 
-# What You'll Receive
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("## 🎁 Lo Que Recibes")
+Los datos cubren los principales mercados financieros globales con la siguiente distribución: **América** (13,041 acciones - 22.4%), **India** (5,441 - 9.4%), **Japón** (4,336 - 7.5%), **Canadá** (4,140 - 7.1%), **Corea del Sur** (3,964 - 6.8%), **Taiwan** (2,602 - 4.5%), **Hong Kong** (2,560 - 4.4%), **Reino Unido** (2,137 - 3.7%), **Australia** (2,087 - 3.6%), **Alemania** (1,535 - 2.6%), **Vietnam** (1,300 - 2.2%), **Malasia** (1,097 - 1.9%), **Tailandia** (986 - 1.7%), **Francia** (973 - 1.7%), **Israel** (963 - 1.7%), **Suecia** (928 - 1.6%), **Indonesia** (903 - 1.6%), **Brasil** (898 - 1.5%), y otros 46 países más incluyendo Polonia, Turquía, Singapur, Pakistán, Suiza, Rusia, Italia, Bangladesh, España, Noruega, Sri Lanka, Países Bajos, Filipinas, Egipto, Rumanía, Dinamarca, Finlandia, Chile, México, Emiratos Árabes Unidos, Nueva Zelanda, Nigeria, Grecia, Kuwait, Bélgica, Colombia, Luxemburgo, Marruecos, Austria, Argentina, Hungría, Perú, Qatar, Kenia, Portugal, Estonia, Chipre, República Checa, Lituania, Venezuela, Islandia, Bahréin, Irlanda, Serbia, Letonia, y Eslovaquia.
 
-col1, col2, col3 = st.columns(3)
+Las principales **exchanges** incluidas son: **TSE** (Tokio - 4,234 acciones), **NASDAQ** (4,230), **KRX** (Corea - 3,964), **NSE** (India - 2,989), **OTC** (2,881), **AMEX** (2,738), **HKEX** (Hong Kong - 2,560), **BSE** (India - 2,452), **NYSE** (2,106), **ASX** (Australia - 2,087), **LSE** (Londres - 2,065), **TSX** (Toronto - 1,925), **XETR** (Alemania - 1,466), **EURONEXT** (1,404), **TSXV** (1,359), y 75 exchanges adicionales.
 
-with col1:
-    st.markdown("""
-    <div class='highlight-box' style='height: 100%;'>
-        <h3>📦 Código & Datos</h3>
-        <ul>
-            <li>Base de datos completa (CSV)</li>
-            <li>Scripts de scraping documentados</li>
-            <li>Pipeline ETL profesional</li>
-            <li>Notebooks Jupyter explicativos</li>
-            <li>Código modular y reutilizable</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+### 📊 Las 982 Métricas Disponibles
 
-with col2:
-    st.markdown("""
-    <div class='highlight-box' style='height: 100%;'>
-        <h3>🛠️ Herramientas</h3>
-        <ul>
-            <li>Dashboard Streamlit completo</li>
-            <li>Templates de screeners</li>
-            <li>Funciones de análisis</li>
-            <li>Sistema de backtesting</li>
-            <li>Módulos de visualización</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+Cada acción de la base de datos tiene **982 métricas diferentes** organizadas en múltiples categorías:
 
-with col3:
-    st.markdown("""
-    <div class='highlight-box' style='height: 100%;'>
-        <h3>📚 Documentación</h3>
-        <ul>
-            <li>Guía completa de métricas</li>
-            <li>Estrategias de screening</li>
-            <li>Casos de estudio reales</li>
-            <li>Best practices</li>
-            <li>Grabación del seminario</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+**Métricas Fundamentales (373 métricas):**
+- **Valoración (27):** P/E ratio, P/B ratio, P/S ratio, Price/Free Cash Flow, EV/EBITDA, EV/Revenue, EV/EBIT, PEG ratio, Enterprise Value, Graham Numbers, Price/Working Capital, y más
+- **Rentabilidad (38):** Net margin, Operating margin, Gross margin, ROE (Return on Equity), ROA (Return on Assets), ROIC (Return on Invested Capital), ROC, Return on Tangible Assets, Return on Common Equity, EBITDA margin, Pre-tax margin, After-tax margin, y variaciones
+- **Solvencia y Salud Financiera (64):** Debt/Equity, Current ratio, Quick ratio, Debt/Assets, Long-term debt ratios, Interest coverage, Altman Z-Score, Zmijewski Score, Cash ratios, Working capital metrics, Total debt to capital, Net debt to EBITDA
+- **Crecimiento (41):** YoY growth (revenue, earnings, EBITDA, FCF), QoQ growth, CAGR 5 años, EPS growth, Capital expenditures growth, Total assets growth, Debt growth
+- **Cash Flow (65):** Free Cash Flow, Operating Cash Flow, Cash from investing/financing activities, FCF margin, FCF per share, Capital expenditures, Cash flow coverage ratios
+- **Dividendos (43):** Dividend yield, Payout ratio, Dividends per share, Continuous dividend growth/payout, Dividend dates, Indicated annual dividend, Buyback yield
+- **Calidad (14):** Piotroski F-Score (0-9), Altman Z-Score (bankruptcy prediction), Sloan Ratio (earnings quality), Graham Numbers, Tobin's Q ratio, Zmijewski Score, Sustainable growth rate
+- **Per Share (81):** Todas las métricas anteriores calculadas por acción (EPS, Book value, Revenue, EBITDA, EBIT, Cash, Free cash flow, Operating cash flow, Capex, Working capital, etc.)
 
-# Technical Stack
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("## 🔧 Stack Tecnológico")
+**Métricas Técnicas (249 indicadores):**
+- **Moving Averages (66):** 33 SMA (periodos 2-300) + 33 EMA (periodos 2-300), incluyendo señales de Golden Cross y Death Cross
+- **Osciladores (50):** RSI en 25 variaciones y periodos, Stochastic (22 configuraciones: K y D), MACD (macd, signal, histogram), CCI, Momentum, ROC, Williams %R, Ultimate Oscillator
+- **Trend & Volatility (75):** ADX con 26 indicadores incluyendo +DI y -DI, Ichimoku Cloud (8 componentes: Tenkan, Kijun, Senkou A/B, Chikou), Bollinger Bands (6 configuraciones), ATR, ATRP, Keltner Channels, Donchian Channels
+- **Patrones de Velas (27):** Detección automática de Doji, Doji Dragonfly, Doji Gravestone, Hammer, Hanging Man, Inverted Hammer, Shooting Star, Bullish/Bearish Engulfing, Bullish/Bearish Harami, Morning Star, Evening Star, Three White Soldiers, Three Black Crows, Marubozu (White/Black), Spinning Tops, Long Shadows, Kicking, Abandoned Baby, TriStar
+- **Pivot Points (31):** 5 metodologías completas (Classic, Fibonacci, Woodie, Camarilla, Demark) con resistencias R1/R2/R3 y soportes S1/S2/S3
+- **Otros (35):** VWAP, VWMA, Aroon Up/Down, Parabolic SAR, Chaikin Money Flow, Money Flow Index, BBPower, Hull MA, Awesome Oscillator
 
-col1, col2, col3, col4 = st.columns(4)
+**Performance & Risk (44 métricas):**
+- **Performance (18):** Rendimientos en múltiples timeframes: 5D, 1W, 1M, 3M, 6M, 1Y, YTD, 3Y, 5Y, 10Y, All-time. También ajustados por market cap
+- **Volatilidad (9):** Beta 1Y/3Y/5Y, ATR, ATRP, Volatilidad diaria/semanal/mensual
+- **Volumen (17):** Volume, Average volume (10/30/60/90 días), Relative volume, Volume change, Premarket/Postmarket volume, Value traded
 
-with col1:
-    st.markdown("""
-    <div class='feature-box'>
-        <h3>🐍 Python</h3>
-        <p>Pandas, NumPy, Requests, BeautifulSoup, Selenium</p>
-    </div>
-    """, unsafe_allow_html=True)
+**Analyst & Forecasts (54 métricas):**
+Recomendaciones de analistas (Buy/Hold/Sell), Price targets (high/low/average/median), Earnings forecasts (próximos FQ/FH/FY), Revenue forecasts, EPS surprises, Revenue surprises, Earnings release dates, Non-GAAP estimaciones
 
-with col2:
-    st.markdown("""
-    <div class='feature-box'>
-        <h3>📊 Análisis</h3>
-        <p>TALib, Plotly, Matplotlib, Scikit-learn</p>
-    </div>
-    """, unsafe_allow_html=True)
+### 📅 Perspectivas Temporales
 
-with col3:
-    st.markdown("""
-    <div class='feature-box'>
-        <h3>🌐 Web Scraping</h3>
-        <p>APIs REST, JSON, Proxies, Rate Limiting</p>
-    </div>
-    """, unsafe_allow_html=True)
+Todas las métricas fundamentales están disponibles en **5 timeframes diferentes** para análisis temporal completo:
+- **Quarterly (FQ):** 112 métricas trimestrales
+- **Semi-Annual (FH):** 35 métricas semestrales  
+- **Fiscal Year (FY):** 129 métricas anuales
+- **Trailing Twelve Months (TTM):** 69 métricas de últimos 12 meses
+- **Current Period:** 30 métricas del periodo actual
 
-with col4:
-    st.markdown("""
-    <div class='feature-box'>
-        <h3>💻 Dashboard</h3>
-        <p>Streamlit, CSS Custom, Responsive Design</p>
-    </div>
-    """, unsafe_allow_html=True)
+### 💼 Distribución por Capitalización
 
-# Target Audience
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("## 👥 ¿Para Quién Es Este Seminario?")
+La base de datos cubre todo el espectro de capitalizaciones de mercado con **42,162 acciones** con datos de market cap: **Mega Cap** (>$200B): 386 acciones (0.9%), **Large Cap** ($10B-$200B): 2,514 acciones (6.0%), **Mid Cap** ($2B-$10B): 3,554 acciones (8.4%), **Small Cap** ($300M-$2B): 7,602 acciones (18.0%), **Micro Cap** (<$300M): 28,106 acciones (66.7%). Capitalización media: $17.6B, mediana: $91.3M.
 
-col1, col2 = st.columns(2)
+### 🏢 Sectores Cubiertos
 
-with col1:
-    st.markdown("""
-    <div class='highlight-box'>
-        <h3>✅ Perfecto Para Ti Si:</h3>
-        <ul>
-            <li>Quieres sistematizar tu análisis de inversiones</li>
-            <li>Buscas automatizar la recopilación de datos</li>
-            <li>Necesitas analizar cientos de acciones rápidamente</li>
-            <li>Quieres construir tus propias herramientas</li>
-            <li>Te interesa el análisis cuantitativo</li>
-            <li>Eres trader, inversor, o analista financiero</li>
-            <li>Estudiaste finanzas y quieres skills técnicos</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+**21 sectores principales:** Finance (7,479 acciones), Technology Services (3,653), Producer Manufacturing (3,772), Non-Energy Minerals (3,652), Process Industries (3,359), Health Technology (3,091), Electronic Technology (2,669), Commercial Services (2,078), Consumer Non-Durables (1,963), Retail Trade, Energy Minerals, Consumer Services, Utilities, Transportation, Consumer Durables, Distribution Services, Industrial Services, Health Services, Communications, Government, y Miscellaneous (13,142).
+""")
 
-with col2:
-    st.markdown("""
-    <div class='highlight-box'>
-        <h3>📋 Requisitos Previos:</h3>
-        <ul>
-            <li>Python básico (variables, loops, funciones)</li>
-            <li>Conocimientos básicos de finanzas</li>
-            <li>Familiaridad con pandas (deseable)</li>
-            <li>Ganas de aprender y practicar</li>
-        </ul>
-        <h3 style='margin-top: 30px;'>🚀 Nivel:</h3>
-        <p style='color: #ffffff;'>Intermedio - Avanzado<br>
-        <strong style='color: #00ffaa;'>3 horas intensivas + material complementario</strong></p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# Competitive Advantage
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("## ⚡ Ventaja Competitiva")
+st.markdown("---")
 
 st.markdown("""
-<div style='background: linear-gradient(135deg, rgba(255, 0, 100, 0.1) 0%, rgba(255, 200, 0, 0.1) 100%); 
-            border-radius: 20px; padding: 40px; margin: 30px 0; border: 2px solid rgba(255, 100, 0, 0.3);'>
-    <h3 style='text-align: center; color: #ff6b6b; font-size: 2rem;'>Screeners Online vs Tu Propio Sistema</h3>
-    <br>
-    <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;'>
-        <div>
-            <h4 style='color: #ff6b6b;'>❌ Screeners Online:</h4>
-            <ul style='color: #ffffff;'>
-                <li>Datos limitados (500-3,000 acciones)</li>
-                <li>20-80 métricas predefinidas</li>
-                <li>Sin acceso a datos históricos completos</li>
-                <li>Dependes de sus actualizaciones</li>
-                <li>Sin personalización avanzada</li>
-                <li>Suscripciones mensuales de 30-200€/mes</li>
-                <li>Caja negra (no controlas la lógica)</li>
-                <li>Límites de búsquedas diarias</li>
-            </ul>
-        </div>
-        <div>
-            <h4 style='color: #00ffaa;'>✅ Tu Propio Sistema:</h4>
-            <ul style='color: #ffffff;'>
-                <li><strong style='color: #00ffaa;'>58,168 acciones</strong> globales</li>
-                <li><strong style='color: #00ffaa;'>982 métricas</strong> por acción</li>
-                <li><strong style='color: #00ffaa;'>Control total</strong> del dataset</li>
-                <li><strong style='color: #00ffaa;'>Actualizas</strong> cuando quieras</li>
-                <li><strong style='color: #00ffaa;'>Personalización ilimitada</strong></li>
-                <li><strong style='color: #00ffaa;'>Pago único</strong> - tuyo para siempre</li>
-                <li><strong style='color: #00ffaa;'>Código abierto</strong> - modificable</li>
-                <li><strong style='color: #00ffaa;'>Sin límites</strong> de uso</li>
-            </ul>
-        </div>
-    </div>
-    <h3 style='text-align: center; color: #00d4ff; margin-top: 40px; font-size: 2.5rem;'>
-        🚀 10-20x más acciones | 12-50x más métricas | Libertad Total
-    </h3>
-    <p style='text-align: center; color: #ffffff; font-size: 1.3rem; margin-top: 20px;'>
-        En lugar de pagar 30-50€/mes indefinidamente, inviertes una vez<br>
-        y obtienes un sistema profesional que puedes usar para siempre
-    </p>
-</div>
-""", unsafe_allow_html=True)
+## ⚡ ¿Por Qué Construir Tu Propio Sistema?
 
-# Case Studies
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("## 📈 Casos Prácticos Incluidos")
+### La Realidad de los Screeners Online
 
-col1, col2, col3 = st.columns(3)
+Los screeners disponibles en internet (gratuitos o de pago) tienen **limitaciones importantes**: normalmente ofrecen entre 500 y 3,000 acciones (principalmente USA), con 20 a 80 métricas predefinidas. No tienes acceso a datos históricos completos, dependes completamente de sus actualizaciones, la personalización es muy limitada o inexistente, funcionan como "caja negra" sin que entiendas la lógica interna, suelen tener límites diarios de búsquedas, y requieren suscripciones mensuales que van de 30€ a 200€/mes.
 
-with col1:
-    st.markdown("""
-    <div class='feature-box'>
-        <h3>💰 Value Investing</h3>
-        <p>• P/E < 15 & P/B < 1.5<br>
-        • ROE > 15%<br>
-        • Debt/Equity < 0.5<br>
-        • Piotroski F-Score > 7<br>
-        • Dividend Yield > 3%</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-with col2:
-    st.markdown("""
-    <div class='feature-box'>
-        <h3>🚀 Growth Stocks</h3>
-        <p>• Revenue Growth > 20%<br>
-        • EPS Growth > 25%<br>
-        • PEG Ratio < 1.5<br>
-        • Sloan Ratio < 0<br>
-        • Strong momentum (RSI)</p>
-    </div>
-    """, unsafe_allow_html=True)
+### Tu Propio Sistema
 
-with col3:
-    st.markdown("""
-    <div class='feature-box'>
-        <h3>👑 Quality Investing</h3>
-        <p>• ROE > 20% consistente<br>
-        • Altman Z-Score > 3<br>
-        • FCF Margin > 15%<br>
-        • Low volatility<br>
-        • Continuous dividends</p>
-    </div>
-    """, unsafe_allow_html=True)
+Con lo que aprenderás en este seminario construirás un sistema con **58,168 acciones** de **64 países** (10-20x más cobertura), **982 métricas** por acción (12-50x más profundidad analítica), **control total** sobre el dataset y actualizaciones, **personalización ilimitada** de filtros y criterios, código **open source** que puedes modificar y adaptar, **sin límites** de uso ni búsquedas, y **pago único** - el sistema es tuyo para siempre sin mensualidades.
 
-# Timeframes
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("## 📅 Análisis Multi-Timeframe")
+**Ventaja económica:** En lugar de pagar 30-50€/mes indefinidamente (360-600€/año), haces una **inversión única de 89€** y obtienes un sistema profesional que puedes usar, modificar y actualizar cuando quieras, sin depender de nadie.
+
+**Ventaja técnica:** Aprendes el proceso completo - no solo usas una herramienta, sino que entiendes cómo funciona y puedes adaptarla a tus necesidades específicas. Puedes agregar nuevas métricas, crear tus propias fórmulas, combinar indicadores de formas únicas, y construir estrategias de screening completamente personalizadas.
+""")
+
+st.markdown("---")
 
 st.markdown("""
-<div class='highlight-box'>
-    <h3 style='text-align: center;'>Todas las métricas disponibles en 5 perspectivas temporales:</h3>
-    <br>
-    <div style='display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; text-align: center;'>
-        <div>
-            <h4 style='color: #00d4ff;'>Quarterly (FQ)</h4>
-            <p style='font-size: 2rem; color: #00ffaa; font-weight: 800;'>112</p>
-            <p style='color: #ffffff;'>métricas</p>
-        </div>
-        <div>
-            <h4 style='color: #00d4ff;'>Semi-Annual (FH)</h4>
-            <p style='font-size: 2rem; color: #00ffaa; font-weight: 800;'>35</p>
-            <p style='color: #ffffff;'>métricas</p>
-        </div>
-        <div>
-            <h4 style='color: #00d4ff;'>Fiscal Year (FY)</h4>
-            <p style='font-size: 2rem; color: #00ffaa; font-weight: 800;'>129</p>
-            <p style='color: #ffffff;'>métricas</p>
-        </div>
-        <div>
-            <h4 style='color: #00d4ff;'>TTM</h4>
-            <p style='font-size: 2rem; color: #00ffaa; font-weight: 800;'>69</p>
-            <p style='color: #ffffff;'>métricas</p>
-        </div>
-        <div>
-            <h4 style='color: #00d4ff;'>Current</h4>
-            <p style='font-size: 2rem; color: #00ffaa; font-weight: 800;'>30</p>
-            <p style='color: #ffffff;'>métricas</p>
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+## 🎓 Casos Prácticos Durante el Seminario
 
-# Final CTA
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+Durante las 3 horas veremos ejemplos reales de estrategias de screening:
+
+**Value Investing:** Filtrado de acciones infravaloradas usando P/E < 15, P/B < 1.5, ROE > 15%, Debt/Equity < 0.5, Piotroski F-Score > 7, Dividend Yield > 3%. Aprenderás a combinar múltiples ratios de valoración con métricas de calidad financiera.
+
+**Growth Stocks:** Identificación de empresas de alto crecimiento con Revenue Growth > 20% YoY, EPS Growth > 25%, PEG Ratio < 1.5, Sloan Ratio < 0 (buena calidad de earnings), Strong momentum técnico (RSI, Moving Averages). Verás cómo filtrar empresas con crecimiento sostenible vs crecimiento artificial.
+
+**Quality Investing:** Selección de empresas con ROE > 20% consistente en múltiples años, Altman Z-Score > 3 (baja probabilidad de quiebra), Free Cash Flow Margin > 15%, Low volatility (Beta < 1), Continuous dividends. Aprenderás a construir filtros que priorizan la solidez financiera sobre el crecimiento agresivo.
+
+**Dividend Aristocrats:** Búsqueda de empresas con dividendos crecientes y sostenibles usando Dividend Yield > 2%, Continuous Dividend Growth > 5 años, Payout Ratio < 60%, FCF to Dividend ratio > 1.5, Positive revenue growth.
+
+**Technical Momentum:** Screening basado en señales técnicas como Golden Cross (SMA50 > SMA200), RSI entre 50-70 (momentum positivo sin sobreventa), MACD bullish crossover, Price above all major MAs, Volume > average 60 días.
+
+Cada estrategia incluye el código completo, la lógica de filtrado, y la interpretación de resultados.
+""")
+
+st.markdown("---")
 
 st.markdown("""
-<div style='text-align: center; padding: 60px 20px; 
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 255, 170, 0.15) 100%);
-            border-radius: 30px; margin: 50px 0;'>
-    <h2 style='font-size: 3rem; color: #00d4ff; margin-bottom: 20px;'>
-        🚀 Transforma Tu Forma de Analizar Acciones
-    </h2>
-    <p style='font-size: 1.5rem; color: #ffffff; margin: 30px 0;'>
-        De análisis manual de 5-10 acciones con métricas básicas<br>
-        A <strong style='color: #00ffaa;'>screening sistemático de 58,168 acciones</strong> con criterios profesionales
-    </p>
-    <p style='font-size: 1.3rem; color: #00d4ff; margin: 40px 0;'>
-        ✓ No más decisiones por intuición<br>
-        ✓ No más dependencia de plataformas<br>
-        ✓ Control total sobre tus herramientas
-    </p>
-</div>
-""", unsafe_allow_html=True)
+## 🔧 Stack Tecnológico
 
-# Pricing Section
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+El seminario utiliza **Python** como lenguaje principal con las siguientes librerías: **Pandas** y **NumPy** para manipulación y análisis de datos, **Requests** para peticiones HTTP a APIs, **BeautifulSoup** y **Selenium** para scraping web cuando es necesario, **Plotly** y **Matplotlib** para visualizaciones, **TALib** para indicadores técnicos avanzados, y **Scikit-learn** para análisis estadístico.
+
+No necesitas experiencia previa con todas estas librerías - te explicaré cada una durante el seminario. Solo necesitas conocimientos básicos de Python (variables, loops, funciones) y familiaridad con Pandas (deseable pero no obligatorio). El nivel es **intermedio-avanzado** pero estructurado para que cualquiera con bases de Python pueda seguirlo.
+""")
+
+st.markdown("---")
+
+st.markdown("""
+## 🎁 Material Incluido
+
+Con tu inscripción al seminario recibes:
+
+### Código Fuente Completo
+- Scripts de scraping documentados línea por línea
+- Pipeline ETL profesional con manejo de errores
+- Módulos de análisis y filtrado reutilizables
+- Notebooks Jupyter con explicaciones detalladas
+- Funciones de visualización y reporting
+
+### Base de Datos
+- CSV con las 58,168 acciones y 982 métricas
+- Diccionario de datos completo (explicación de cada métrica)
+- Scripts de actualización para refrescar los datos
+
+### Documentación
+- Guía técnica de 50+ páginas sobre todas las métricas
+- Estrategias de screening con ejemplos de código
+- 10 casos de estudio reales completamente resueltos
+- Best practices para scraping a gran escala
+- Troubleshooting guide con soluciones a problemas comunes
+
+### Grabación
+- Acceso ilimitado a la grabación del seminario
+- Puedes revisarla las veces que necesites
+- Transcripción con timestamps para búsqueda rápida
+""")
+
+st.markdown("---")
+
+# Pricing
 st.markdown("## 💰 Información y Precio")
 
-col1, col2 = st.columns([1, 1])
+col1, col2 = st.columns([3, 2])
 
 with col1:
     st.markdown("""
-    <div class='highlight-box'>
-        <h3>📋 Detalles del Seminario:</h3>
-        <p style='color: #ffffff; font-size: 1.2rem; line-height: 2;'>
-        <strong style='color: #00ffaa;'>⏱️ Duración:</strong> 3 horas intensivas<br>
-        <strong style='color: #00ffaa;'>📹 Formato:</strong> Online vía Zoom<br>
-        <strong style='color: #00ffaa;'>🎥 Grabación:</strong> Incluida (acceso ilimitado)<br>
-        <strong style='color: #00ffaa;'>📚 Material:</strong> Código + Datos + Documentación<br>
-        <strong style='color: #00ffaa;'>🔧 Nivel:</strong> Intermedio-Avanzado<br>
-        <strong style='color: #00ffaa;'>🗣️ Idioma:</strong> Español
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    ### Detalles del Seminario
+    
+    **Duración:** 3 horas intensivas (con descanso de 10 minutos a mitad)
+    
+    **Formato:** Online en vivo vía Zoom - sesión interactiva donde puedes hacer preguntas en tiempo real
+    
+    **Fecha:** [Próximas fechas disponibles - consultar]
+    
+    **Horario:** [A confirmar según inscripciones]
+    
+    **Grabación:** Incluida con acceso ilimitado - si no puedes asistir en vivo o quieres repasar el contenido
+    
+    **Idioma:** Español
+    
+    **Nivel:** Intermedio-Avanzado (requiere Python básico)
+    
+    **Requisitos técnicos:** Ordenador con Python 3.8+ instalado, conexión a internet estable, 4GB RAM mínimo
+    
+    **Soporte:** Grupo privado para resolver dudas post-seminario durante 30 días
+    """)
 
 with col2:
     st.markdown("""
-    <div class='highlight-box' style='text-align: center; padding: 50px 20px;'>
-        <h3 style='color: #00d4ff; margin-bottom: 30px;'>💎 Inversión Única</h3>
-        <div class='price-tag'>
-            89€
-        </div>
-        <p style='color: #ffffff; font-size: 1.2rem; margin-top: 30px;'>
-        <strong style='color: #00ffaa;'>Incluye:</strong><br>
-        ✓ Acceso al seminario en vivo<br>
+    <div class='price-box'>
+        <div style='font-size: 1.2rem; margin-bottom: 10px;'>Inversión Única</div>
+        <div class='amount'>89€</div>
+        <div style='font-size: 1rem; margin-top: 15px;'>IVA incluido</div>
+    </div>
+    
+    <div class='highlight'>
+        <strong>✓ Acceso inmediato al material preparatorio</strong><br>
+        ✓ Seminario en vivo de 3 horas<br>
         ✓ Grabación para siempre<br>
         ✓ Todo el código fuente<br>
-        ✓ Base de datos completa<br>
-        ✓ Documentación técnica<br>
-        ✓ Casos prácticos<br>
-        ✓ Templates y herramientas
-        </p>
+        ✓ Base de datos completa (58K acciones)<br>
+        ✓ Documentación técnica (50+ páginas)<br>
+        ✓ 10 casos prácticos resueltos<br>
+        ✓ Soporte 30 días post-seminario
     </div>
     """, unsafe_allow_html=True)
 
-# Contact Section
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("## 📧 Sobre el Instructor")
+st.markdown("---")
 
 st.markdown("""
-<div class='highlight-box'>
-    <div style='display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center;'>
-        <div style='text-align: center;'>
-            <div style='width: 150px; height: 150px; margin: 0 auto; background: linear-gradient(135deg, #00d4ff, #00ffaa); 
-                        border-radius: 50%; display: flex; align-items: center; justify-content: center;'>
-                <span style='font-size: 4rem;'>👨‍💻</span>
-            </div>
-            <h3 style='color: #00d4ff; margin-top: 20px;'>@Gsnchez</h3>
-        </div>
-        <div>
-            <p style='color: #ffffff; font-size: 1.2rem; line-height: 1.8;'>
-            <strong style='color: #00ffaa;'>Quantitative Finance Professional</strong><br><br>
-            Especializado en análisis cuantitativo y desarrollo de herramientas financieras.<br>
-            Creador de <strong style='color: #00d4ff;'>bquantfinance.com</strong> y del newsletter 
-            <strong style='color: #00d4ff;'>BQuant Fund Lab</strong>.<br><br>
-            Docente en programas de Master of Finance & Banking, enfocado en la aplicación práctica 
-            de Python para análisis financiero y trading cuantitativo.
-            </p>
-        </div>
-    </div>
+## 👥 ¿Para Quién Es Este Seminario?
+
+**Perfecto para ti si:**
+- Eres **inversor** o **trader** que quiere sistematizar el análisis de acciones con datos objetivos
+- Trabajas como **analista financiero** y necesitas herramientas más potentes que los screeners comerciales
+- Eres **gestor de carteras** buscando automatizar la selección de valores
+- Estudiaste **finanzas** o **economía** y quieres adquirir skills técnicos muy demandados
+- Te interesa el **análisis cuantitativo** y quieres construir tus propias herramientas
+- Quieres **independencia** de plataformas de terceros y control total sobre tus datos
+- Necesitas analizar **cientos de acciones** de forma rápida y eficiente
+- Buscas crear **estrategias de screening personalizadas** que otros no tienen
+
+**Requisitos previos:**
+- Python básico: debes saber qué son variables, listas, diccionarios, loops (for/while), funciones, y cómo importar librerías
+- Conocimientos de finanzas: entender qué es P/E ratio, ROE, Free Cash Flow, deuda, márgenes - conceptos básicos
+- Familiaridad con Pandas es un plus pero no obligatorio (te explicaré lo necesario)
+- Ganas de aprender, practicar y hacer preguntas
+
+**No es para ti si:**
+- No tienes ninguna experiencia con Python (necesitas al menos lo básico)
+- Buscas un curso de "introducción a las finanzas" - asumimos que entiendes los conceptos fundamentales
+- Quieres una solución "click and go" sin entender cómo funciona - aquí construimos desde cero
+- No estás dispuesto a invertir tiempo en practicar después del seminario
+""")
+
+st.markdown("---")
+
+st.markdown("""
+## 👨‍💻 Sobre el Instructor
+
+**Gerard Sánchez (@Gsnchez)** es Quantitative Finance Professional especializado en análisis cuantitativo y desarrollo de herramientas financieras con Python. Es el creador de **bquantfinance.com** y del newsletter **BQuant Fund Lab** en Substack, donde comparte análisis técnicos y estrategias cuantitativas con una audiencia de inversores y analistas profesionales.
+
+Con experiencia como docente en programas de **Master of Finance & Banking**, Gerard se enfoca en la aplicación práctica de técnicas cuantitativas para trading e inversión. Su especialidad es convertir conceptos complejos de finanzas cuantitativas en herramientas concretas y código funcional que los profesionales pueden usar inmediatamente.
+
+A lo largo de su carrera ha desarrollado múltiples sistemas de análisis, backtesting y screening para fondos de inversión y gestoras, siempre con el objetivo de **sistematizar decisiones de inversión** basadas en datos objetivos en lugar de intuición.
+
+Este seminario es el resultado de años construyendo estas herramientas y la destilación de las técnicas más prácticas y efectivas para crear screeners profesionales desde cero.
+""")
+
+st.markdown("---")
+
+st.markdown("""
+<div style='text-align: center; padding: 50px 20px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 255, 170, 0.1)); border-radius: 15px; margin: 40px 0;'>
+    <h2 style='color: #00d4ff; font-size: 2.5rem; margin-bottom: 20px;'>
+        🚀 De Análisis Manual a Sistema Profesional en 3 Horas
+    </h2>
+    <p style='font-size: 1.3rem; color: #ffffff; line-height: 1.8; max-width: 900px; margin: 20px auto;'>
+        Deja de depender de screeners limitados que te cobran cada mes.<br>
+        Deja de analizar manualmente 5-10 acciones con métricas básicas.<br><br>
+        Construye tu propio sistema con <strong style='color: #00ffaa;'>58,168 acciones</strong> de <strong style='color: #00ffaa;'>64 países</strong> 
+        y <strong style='color: #00ffaa;'>982 métricas</strong> por acción.<br><br>
+        <strong style='color: #00d4ff;'>Control total. Personalización ilimitada. Tuyo para siempre.</strong>
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
-# Footer
-st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+st.markdown("---")
+
 st.markdown("""
-<div style='text-align: center; padding: 40px; color: #666;'>
-    <p style='font-size: 1.3rem; color: #00d4ff; margin-bottom: 20px;'>
-        💡 <strong>Deja de invertir por rumores. Invierte con DATOS.</strong>
+<div style='text-align: center; padding: 30px;'>
+    <p style='font-size: 1.2rem; color: #00d4ff; margin-bottom: 15px;'>
+        💡 <strong>No más decisiones por rumores. Invierte con DATOS.</strong>
     </p>
-    <p style='font-size: 1.1rem; color: #00ffaa; margin-bottom: 30px;'>
-        🎯 Construye tu propio sistema de análisis profesional en 3 horas
-    </p>
-    <p style='margin-top: 20px; color: #888;'>
-        © 2024 BQuant Finance | Stock Screener Masterclass
+    <p style='font-size: 1rem; color: #888; margin-top: 20px;'>
+        © 2024 BQuant Finance | Stock Screener Masterclass<br>
+        Para más información: <strong style='color: #00ffaa;'>@Gsnchez</strong> | bquantfinance.com
     </p>
 </div>
 """, unsafe_allow_html=True)
