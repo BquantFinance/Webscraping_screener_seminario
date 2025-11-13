@@ -116,67 +116,23 @@ st.markdown("""
         background: linear-gradient(90deg, transparent, #00d4ff, transparent);
         margin: 50px 0;
     }
-    
-    .asset-badge {
-        display: inline-block;
-        padding: 8px 16px;
-        margin: 5px;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 1rem;
-    }
-    
-    .badge-stocks {
-        background: rgba(0, 212, 255, 0.2);
-        border: 2px solid #00d4ff;
-        color: #00d4ff;
-    }
-    
-    .badge-etfs {
-        background: rgba(0, 255, 170, 0.2);
-        border: 2px solid #00ffaa;
-        color: #00ffaa;
-    }
-    
-    .badge-crypto {
-        background: rgba(255, 170, 0, 0.2);
-        border: 2px solid #ffaa00;
-        color: #ffaa00;
-    }
-    
-    .badge-forex {
-        background: rgba(170, 0, 255, 0.2);
-        border: 2px solid #aa00ff;
-        color: #aa00ff;
-    }
 </style>
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown("<h1>📊 FINANCIAL SCREENER MASTERCLASS</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; font-size: 1.3rem; color: #00ffaa; margin-bottom: 20px;'>Seminario Intensivo: Web Scraping y Screening Avanzado con Python</p>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; font-size: 1.2rem; color: #ffffff; margin-bottom: 40px;'>Stocks • ETFs • Crypto • Forex</p>", unsafe_allow_html=True)
-
-# Asset class badges
-st.markdown("""
-<div style='text-align: center; margin-bottom: 40px;'>
-    <span class='asset-badge badge-stocks'>📈 58,168 STOCKS</span>
-    <span class='asset-badge badge-etfs'>💼 30,167 ETFs</span>
-    <span class='asset-badge badge-crypto'>₿ 67,476 CRYPTO</span>
-    <span class='asset-badge badge-forex'>💱 7,174 FOREX</span>
-</div>
-""", unsafe_allow_html=True)
+st.markdown("<h1>📊 STOCK SCREENER MASTERCLASS</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 1.3rem; color: #00ffaa; margin-bottom: 40px;'>Seminario Intensivo: Web Scraping y Stock Screening con Python</p>", unsafe_allow_html=True)
 
 # Key numbers in a row
 col1, col2, col3, col4 = st.columns(4)
 with col1:
-    st.markdown("<div class='big-stat'><span class='number'>162,985</span><span class='label'>Instrumentos Totales</span></div>", unsafe_allow_html=True)
+    st.markdown("<div class='big-stat'><span class='number'>58,168</span><span class='label'>Acciones</span></div>", unsafe_allow_html=True)
 with col2:
-    st.markdown("<div class='big-stat'><span class='number'>~600</span><span class='label'>Métricas Promedio</span></div>", unsafe_allow_html=True)
+    st.markdown("<div class='big-stat'><span class='number'>982</span><span class='label'>Métricas/Acción</span></div>", unsafe_allow_html=True)
 with col3:
-    st.markdown("<div class='big-stat'><span class='number'>64</span><span class='label'>Países (Stocks)</span></div>", unsafe_allow_html=True)
+    st.markdown("<div class='big-stat'><span class='number'>64</span><span class='label'>Países</span></div>", unsafe_allow_html=True)
 with col4:
-    st.markdown("<div class='big-stat'><span class='number'>4</span><span class='label'>Asset Classes</span></div>", unsafe_allow_html=True)
+    st.markdown("<div class='big-stat'><span class='number'>90</span><span class='label'>Exchanges</span></div>", unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -184,124 +140,84 @@ st.markdown("---")
 st.markdown("""
 ## 🎯 Sobre el Seminario
 
-En este seminario intensivo de **3 horas** aprenderás a construir tu propio sistema profesional de screening para **múltiples asset classes**: acciones, ETFs, criptomonedas y forex. Te enseñaré el proceso completo: desde la **extracción masiva de datos financieros mediante web scraping**, hasta la **construcción de screeners avanzados** con múltiples criterios de filtrado.
+En este seminario intensivo de **3 horas** aprenderás a construir tu propio sistema profesional de stock screening utilizando Python. Te enseñaré el proceso completo: desde la **extracción masiva de datos financieros mediante web scraping**, hasta la **construcción de screeners avanzados** con múltiples criterios de filtrado.
 
-No usaremos plataformas de terceros ni screeners online. Construirás tu **propia herramienta desde cero**, con control total sobre los datos y la lógica de filtrado. Al finalizar, tendrás acceso a bases de datos con **162,985 instrumentos financieros** que incluyen **58,168 acciones** de 64 países, **30,167 ETFs**, **67,476 criptomonedas** y **7,174 pares de forex**, cada uno con cientos de métricas que cubren análisis fundamental, técnico y métricas avanzadas de calidad.
+No usaremos plataformas de terceros ni screeners online. Construirás tu **propia herramienta desde cero**, con control total sobre los datos y la lógica de filtrado. Al finalizar, tendrás acceso a una base de datos con **58,168 acciones** de **64 países** diferentes, cada una con **982 métricas** que incluyen análisis fundamental, técnico y métricas avanzadas de calidad.
 
 ### 📚 ¿Qué Aprenderás Exactamente?
 
-**Parte 1: Web Scraping de Datos Financieros Multi-Asset (90 minutos)**
+**Parte 1: Web Scraping de Datos Financieros (90 minutos)**
 - Extracción de datos desde APIs financieras: autenticación, headers, rate limiting
-- Técnicas de scraping específicas para cada asset class (stocks, ETFs, crypto, forex)
-- Manejo de diferentes estructuras de datos según el tipo de instrumento
+- Técnicas de scraping a gran escala: cómo obtener datos de miles de acciones eficientemente
 - Procesamiento de respuestas JSON y manejo de errores en peticiones HTTP
-- Construcción de pipelines ETL unificados: extracción, transformación y carga
-- Limpieza y normalización de datos financieros para análisis cross-asset
-- Estructuración en DataFrames de Pandas con esquemas compatibles
+- Construcción de pipelines ETL: extracción, transformación y carga de datos
+- Limpieza y normalización de datos financieros para análisis
+- Estructuración en DataFrames de Pandas para análisis posterior
 
-**Parte 2: Construcción de Screeners Multi-Asset (90 minutos)**
-- Arquitectura de un screener universal: diseño modular y escalable
-- Filtros específicos por asset class y filtros comunes cross-asset
+**Parte 2: Construcción de Screeners Profesionales (90 minutos)**
+- Arquitectura de un screener: diseño modular y escalable
+- Filtros simples y complejos: operadores lógicos (AND, OR, NOT)
 - Combinación de múltiples criterios: fundamental + técnico + calidad
-- Screening de correlaciones entre assets (stocks vs crypto, forex vs commodities)
-- Sistemas de scoring y ranking personalizados por categoría
+- Sistemas de scoring y ranking personalizados
 - Backtesting de estrategias de screening: validación histórica
-- Exportación de resultados y generación de reportes multi-asset
+- Exportación de resultados y generación de reportes
 
-## 💎 Las Bases de Datos
+## 💎 La Base de Datos
 
-Trabajarás con **cuatro bases de datos profesionales** que contienen un total de **162,985 instrumentos financieros** con datos reales y actualizados.
+Trabajarás con una base de datos profesional que contiene **58,168 acciones** distribuidas en **64 mercados** de todo el mundo. Son datos reales, actualizados, listos para usar.
 
-### 📈 STOCKS: 58,168 Acciones Globales | 982 Métricas
+### 🌍 Cobertura Geográfica
 
-La base de datos de acciones cubre **58,168 acciones** distribuidas en **64 mercados** de todo el mundo con **982 métricas** por acción.
+Los datos cubren los principales mercados financieros globales con la siguiente distribución: **América** (13,041 acciones - 22.4%), **India** (5,441 - 9.4%), **Japón** (4,336 - 7.5%), **Canadá** (4,140 - 7.1%), **Corea del Sur** (3,964 - 6.8%), **Taiwan** (2,602 - 4.5%), **Hong Kong** (2,560 - 4.4%), **Reino Unido** (2,137 - 3.7%), **Australia** (2,087 - 3.6%), **Alemania** (1,535 - 2.6%), **Vietnam** (1,300 - 2.2%), **Malasia** (1,097 - 1.9%), **Tailandia** (986 - 1.7%), **Francia** (973 - 1.7%), **Israel** (963 - 1.7%), **Suecia** (928 - 1.6%), **Indonesia** (903 - 1.6%), **Brasil** (898 - 1.5%), y otros 46 países más incluyendo Polonia, Turquía, Singapur, Pakistán, Suiza, Rusia, Italia, Bangladesh, España, Noruega, Sri Lanka, Países Bajos, Filipinas, Egipto, Rumanía, Dinamarca, Finlandia, Chile, México, Emiratos Árabes Unidos, Nueva Zelanda, Nigeria, Grecia, Kuwait, Bélgica, Colombia, Luxemburgo, Marruecos, Austria, Argentina, Hungría, Perú, Qatar, Kenia, Portugal, Estonia, Chipre, República Checa, Lituania, Venezuela, Islandia, Bahréin, Irlanda, Serbia, Letonia, y Eslovaquia.
 
-**Cobertura Geográfica:** **América** (13,041 acciones - 22.4%), **India** (5,441 - 9.4%), **Japón** (4,336 - 7.5%), **Canadá** (4,140 - 7.1%), **Corea del Sur** (3,964 - 6.8%), **Taiwan** (2,602 - 4.5%), **Hong Kong** (2,560 - 4.4%), **Reino Unido** (2,137 - 3.7%), **Australia** (2,087 - 3.6%), **Alemania** (1,535 - 2.6%), **Vietnam** (1,300 - 2.2%), y 53 países más.
+Las principales **exchanges** incluidas son: **TSE** (Tokio - 4,234 acciones), **NASDAQ** (4,230), **KRX** (Corea - 3,964), **NSE** (India - 2,989), **OTC** (2,881), **AMEX** (2,738), **HKEX** (Hong Kong - 2,560), **BSE** (India - 2,452), **NYSE** (2,106), **ASX** (Australia - 2,087), **LSE** (Londres - 2,065), **TSX** (Toronto - 1,925), **XETR** (Alemania - 1,466), **EURONEXT** (1,404), **TSXV** (1,359), y 75 exchanges adicionales.
 
-**Principales Exchanges:** **TSE** (Tokio - 4,234), **NASDAQ** (4,230), **KRX** (Corea - 3,964), **NSE** (India - 2,989), **OTC** (2,881), **AMEX** (2,738), **HKEX** (Hong Kong - 2,560), **BSE** (India - 2,452), **NYSE** (2,106), **ASX** (Australia - 2,087), **LSE** (Londres - 2,065), **TSX** (Toronto - 1,925), y 78 exchanges más.
+### 📊 Las 982 Métricas Disponibles
 
-**Métricas de Stocks (982):**
-- **Fundamental (373):** Valoración (27), Rentabilidad (38), Solvencia (64), Crecimiento (41), Cash Flow (65), Dividendos (43), Calidad (14: Piotroski F-Score, Altman Z-Score, Sloan Ratio, Graham Numbers, Tobin's Q), Per Share (81)
-- **Técnicas (249):** Moving Averages (66: SMA + EMA), Osciladores (50: RSI, Stochastic, MACD, CCI, Momentum), Trend & Volatility (75: ADX, Ichimoku, Bollinger Bands, ATR), Patrones de Velas (27), Pivot Points (31)
-- **Performance & Risk (44):** Performance multi-timeframe (18), Volatilidad (9), Volumen (17)
-- **Analyst Data (54):** Recomendaciones, Price targets, Forecasts, Surprises
+Cada acción de la base de datos tiene **982 métricas diferentes** organizadas en múltiples categorías:
 
-**Timeframes:** Todas las métricas fundamentales en 5 perspectivas temporales: Quarterly (FQ) - 112 métricas, Semi-Annual (FH) - 35, Fiscal Year (FY) - 129, TTM - 69, Current - 30
+**Métricas Fundamentales (373 métricas):**
+- **Valoración (27):** P/E ratio, P/B ratio, P/S ratio, Price/Free Cash Flow, EV/EBITDA, EV/Revenue, EV/EBIT, PEG ratio, Enterprise Value, Graham Numbers, Price/Working Capital, y más
+- **Rentabilidad (38):** Net margin, Operating margin, Gross margin, ROE (Return on Equity), ROA (Return on Assets), ROIC (Return on Invested Capital), ROC, Return on Tangible Assets, Return on Common Equity, EBITDA margin, Pre-tax margin, After-tax margin, y variaciones
+- **Solvencia y Salud Financiera (64):** Debt/Equity, Current ratio, Quick ratio, Debt/Assets, Long-term debt ratios, Interest coverage, Altman Z-Score, Zmijewski Score, Cash ratios, Working capital metrics, Total debt to capital, Net debt to EBITDA
+- **Crecimiento (41):** YoY growth (revenue, earnings, EBITDA, FCF), QoQ growth, CAGR 5 años, EPS growth, Capital expenditures growth, Total assets growth, Debt growth
+- **Cash Flow (65):** Free Cash Flow, Operating Cash Flow, Cash from investing/financing activities, FCF margin, FCF per share, Capital expenditures, Cash flow coverage ratios
+- **Dividendos (43):** Dividend yield, Payout ratio, Dividends per share, Continuous dividend growth/payout, Dividend dates, Indicated annual dividend, Buyback yield
+- **Calidad (14):** Piotroski F-Score (0-9), Altman Z-Score (bankruptcy prediction), Sloan Ratio (earnings quality), Graham Numbers, Tobin's Q ratio, Zmijewski Score, Sustainable growth rate
+- **Per Share (81):** Todas las métricas anteriores calculadas por acción (EPS, Book value, Revenue, EBITDA, EBIT, Cash, Free cash flow, Operating cash flow, Capex, Working capital, etc.)
 
-**Capitalización:** Mega Cap (>$200B): 386 | Large Cap ($10B-$200B): 2,514 | Mid Cap ($2B-$10B): 3,554 | Small Cap ($300M-$2B): 7,602 | Micro Cap (<$300M): 28,106
+**Métricas Técnicas (249 indicadores):**
+- **Moving Averages (66):** 33 SMA (periodos 2-300) + 33 EMA (periodos 2-300), incluyendo señales de Golden Cross y Death Cross
+- **Osciladores (50):** RSI en 25 variaciones y periodos, Stochastic (22 configuraciones: K y D), MACD (macd, signal, histogram), CCI, Momentum, ROC, Williams %R, Ultimate Oscillator
+- **Trend & Volatility (75):** ADX con 26 indicadores incluyendo +DI y -DI, Ichimoku Cloud (8 componentes: Tenkan, Kijun, Senkou A/B, Chikou), Bollinger Bands (6 configuraciones), ATR, ATRP, Keltner Channels, Donchian Channels
+- **Patrones de Velas (27):** Detección automática de Doji, Doji Dragonfly, Doji Gravestone, Hammer, Hanging Man, Inverted Hammer, Shooting Star, Bullish/Bearish Engulfing, Bullish/Bearish Harami, Morning Star, Evening Star, Three White Soldiers, Three Black Crows, Marubozu (White/Black), Spinning Tops, Long Shadows, Kicking, Abandoned Baby, TriStar
+- **Pivot Points (31):** 5 metodologías completas (Classic, Fibonacci, Woodie, Camarilla, Demark) con resistencias R1/R2/R3 y soportes S1/S2/S3
+- **Otros (35):** VWAP, VWMA, Aroon Up/Down, Parabolic SAR, Chaikin Money Flow, Money Flow Index, BBPower, Hull MA, Awesome Oscillator
 
-**Sectores (21):** Finance (7,479), Technology Services (3,653), Producer Manufacturing (3,772), Non-Energy Minerals (3,652), Health Technology (3,091), Electronic Technology (2,669), y 15 sectores más.
+**Performance & Risk (44 métricas):**
+- **Performance (18):** Rendimientos en múltiples timeframes: 5D, 1W, 1M, 3M, 6M, 1Y, YTD, 3Y, 5Y, 10Y, All-time. También ajustados por market cap
+- **Volatilidad (9):** Beta 1Y/3Y/5Y, ATR, ATRP, Volatilidad diaria/semanal/mensual
+- **Volumen (17):** Volume, Average volume (10/30/60/90 días), Relative volume, Volume change, Premarket/Postmarket volume, Value traded
 
-### 💼 ETFs: 30,167 Fondos Cotizados | 202 Métricas
+**Analyst & Forecasts (54 métricas):**
+Recomendaciones de analistas (Buy/Hold/Sell), Price targets (high/low/average/median), Earnings forecasts (próximos FQ/FH/FY), Revenue forecasts, EPS surprises, Revenue surprises, Earnings release dates, Non-GAAP estimaciones
 
-Base de datos completa de ETFs con **30,167 fondos** listados en múltiples exchanges globales, incluyendo **202 métricas especializadas**.
+### 📅 Perspectivas Temporales
 
-**Métricas de ETFs (202):**
-- **Características del Fondo:** AUM (Assets Under Management), Expense ratio, Asset class, Focus, Category, Niche, Strategy, Holdings region, Index tracked, Index provider, Brand, Issuer
-- **Estructura:** Leverage ratio, UCITS compliant, Currency hedged, Holds derivatives, Transparent holdings, K1 form, Selection criteria, Weighting scheme, Weight top 10/25/50
-- **Performance:** NAV performance (YTD, 1M, 3M, 6M, 1Y, 3Y, 5Y), Total returns, Fund flows (YTD, 1M, 3M, 1Y, 3Y, 5Y), AUM performance por periodo
-- **Dividendos:** Dividend yield, Indicated annual dividend, Dividend frequency, Dividend treatment
-- **Análisis Técnico:** Todos los indicadores técnicos estándar (RSI, MACD, Moving Averages, Bollinger Bands, Stochastic, ADX, Ichimoku, Pivot Points, 27 patrones de velas)
-- **Risk Metrics:** Beta (1Y/3Y/5Y), Volatility (D/W/M), Volume analysis, Performance metrics
-- **Clasificación:** País, Exchange, Currency, Sector exposure, Geographic exposure
+Todas las métricas fundamentales están disponibles en **5 timeframes diferentes** para análisis temporal completo:
+- **Quarterly (FQ):** 112 métricas trimestrales
+- **Semi-Annual (FH):** 35 métricas semestrales  
+- **Fiscal Year (FY):** 129 métricas anuales
+- **Trailing Twelve Months (TTM):** 69 métricas de últimos 12 meses
+- **Current Period:** 30 métricas del periodo actual
 
-**Tipos de ETFs Cubiertos:** Equity ETFs, Bond ETFs, Commodity ETFs, Currency ETFs, Sector ETFs, Country/Region ETFs, Thematic ETFs, Smart Beta ETFs, Leveraged/Inverse ETFs, Multi-asset ETFs
+### 💼 Distribución por Capitalización
 
-### ₿ CRYPTO: 67,476 Criptomonedas | 421 Métricas
+La base de datos cubre todo el espectro de capitalizaciones de mercado con **42,162 acciones** con datos de market cap: **Mega Cap** (>$200B): 386 acciones (0.9%), **Large Cap** ($10B-$200B): 2,514 acciones (6.0%), **Mid Cap** ($2B-$10B): 3,554 acciones (8.4%), **Small Cap** ($300M-$2B): 7,602 acciones (18.0%), **Micro Cap** (<$300M): 28,106 acciones (66.7%). Capitalización media: $17.6B, mediana: $91.3M.
 
-Base de datos masiva con **67,476 criptomonedas** incluyendo tokens, coins, DeFi tokens, NFT collections, y **421 métricas especializadas**.
+### 🏢 Sectores Cubiertos
 
-**Métricas de Crypto (421):**
-- **Market Data:** Market cap, Fully diluted value, Circulating supply, Total supply, Total shares outstanding/diluted, Price 52-week high/low
-- **DEX Analytics (más de 100 métricas):** Trading volume (15m, 1h, 4h, 12h, 24h), Buy/Sell volume por timeframe, Buyers/Sellers count por periodo, Transaction counts (15m, 1h, 4h, 12h, 24h), Unique transactions, Total liquidity, Buys/Sells counts por periodo, Created time
-- **Technical Analysis Completo:** Todos los indicadores (RSI, MACD, SMA, EMA, Stochastic, ADX, Bollinger Bands, Ichimoku, Pivot Points, ATR, CCI, Momentum, Aroon, VWAP)
-- **Candlestick Patterns:** 27 patrones detectados automáticamente
-- **On-chain Metrics:** Centralization score, Blockchain ID, Total value traded, Volume base/quote
-- **Performance:** Multi-timeframe (5D, 1W, 1M, 3M, 6M, 1Y, YTD, 3Y, 5Y, 10Y, All-time), 24h changes
-- **Volatility & Risk:** Volatility diaria/semanal/mensual, Gap analysis, High/Low tracking
-- **Volume Analysis:** Volume, Volume changes, Average volumes, Relative volume, Value traded
-
-**Exchanges Cubiertos:** PancakeSwap, Bitget, Bithumb, BinanceUS, Pangolin, Aerodrome, Phemex, OKX, Uniswap, SushiSwap, y 100+ exchanges más (CEX y DEX)
-
-**Blockchains:** Ethereum, BSC, Polygon, Avalanche, Arbitrum, Optimism, Solana, Base, y más
-
-### 💱 FOREX: 7,174 Pares de Divisas | 379 Métricas
-
-Base de datos completa de forex con **7,174 pares de divisas** de múltiples brokers y **379 métricas técnicas**.
-
-**Métricas de Forex (379):**
-- **Información del Par:** Exchange code, Pair name, Description, Base currency, Quote currency, Currency priority (major/minor/exotic)
-- **Price Data:** Bid, Ask, Bid-ask spread, Close, Open, High, Low, Price 52-week high/low con fechas, All-time high/low con fechas
-- **Technical Analysis Completo (250+ métricas):** 
-  - Moving Averages: 33 EMA + 33 SMA (periodos 2 a 300)
-  - Oscillators: RSI (11 variaciones), Stochastic (22 configs), MACD, CCI, Williams %R, Ultimate Oscillator, Momentum, ROC, Awesome Oscillator
-  - Trend Indicators: ADX completo (26 indicadores), Ichimoku Cloud (8 componentes), Aroon, Parabolic SAR
-  - Volatility: Bollinger Bands (6 configs), ATR, ATRP, ADR, ADRP, Keltner Channels, Donchian Channels
-  - Volume: VWAP, VWMA, Volume, Value traded, Average volumes, Relative volume
-  - Pivot Points: 31 cálculos (Classic, Fibonacci, Woodie, Camarilla, Demark)
-- **Candlestick Patterns:** 27 patrones (Doji, Hammer, Engulfing, Harami, Morning/Evening Star, etc.)
-- **Performance:** Multi-timeframe (5D, 1W, 1M, 3M, 6M, 1Y, YTD, 3Y, 5Y, 10Y, All-time)
-- **Volatility Metrics:** Daily, Weekly, Monthly volatility
-- **Gap Analysis:** Gap, Gap up/down with absolute values
-- **Change Metrics:** Multiple timeframe changes (5, 15, 30, 60 periods)
-
-**Brokers/Providers Cubiertos:** ThinkMarkets, EasyMarkets, FX_IDC (ICE), IBKR, OANDA, y más
-
-**Categorías de Pares:** Majors (USD pairs), Minors (cross pairs), Exotics (emerging market currencies)
-
-**Cobertura Geográfica:** Pares que incluyen divisas de todos los continentes: USD, EUR, GBP, JPY, CHF, AUD, NZD, CAD (majors), más divisas asiáticas (CNY, INR, KRW, SGD, THB), latinoamericanas (MXN, BRL, ARS, CLP, PEN), africanas (ZAR, NGN), y más.
-
-## 🔄 Ventajas del Enfoque Multi-Asset
-
-Al trabajar con **4 asset classes diferentes** en un solo sistema, obtendrás:
-
-**1. Visión Holística del Mercado:** Entiende correlaciones entre assets (cuando crypto sube, ¿qué pasa con tech stocks?). Identifica rotaciones de capital entre asset classes. Detecta oportunidades de arbitraje o divergencias.
-
-**2. Estrategias Cross-Asset:** Crea portfolios diversificados usando el mismo screener. Compara valuaciones relativas (P/E de stocks vs ratios de crypto). Identifica sectores ganadores en múltiples mercados simultáneamente.
-
-**3. Eficiencia Operativa:** Un solo código base para 4 asset classes. Reutilización de funciones de análisis técnico. Pipeline ETL unificado. Reportes consolidados.
-
-**4. Mayor Alcance:** 162,985 instrumentos vs 500-5,000 en screeners online típicos. Oportunidades en mercados que otros ignoran (small cap crypto, ETFs nicho, forex exóticos). Coverage verdaderamente global.
+**21 sectores principales:** Finance (7,479 acciones), Technology Services (3,653), Producer Manufacturing (3,772), Non-Energy Minerals (3,652), Process Industries (3,359), Health Technology (3,091), Electronic Technology (2,669), Commercial Services (2,078), Consumer Non-Durables (1,963), Retail Trade, Energy Minerals, Consumer Services, Utilities, Transportation, Consumer Durables, Distribution Services, Industrial Services, Health Services, Communications, Government, y Miscellaneous (13,142).
 """)
 
 st.markdown("---")
@@ -311,15 +227,15 @@ st.markdown("""
 
 ### La Realidad de los Screeners Online
 
-Los screeners disponibles en internet (gratuitos o de pago) tienen **limitaciones importantes**: normalmente ofrecen entre 500 y 5,000 instrumentos (principalmente USA stocks), con 20 a 80 métricas predefinidas, **limitados a una sola asset class** (stocks O crypto O forex, nunca integrados). No tienes acceso a datos históricos completos, dependes completamente de sus actualizaciones, la personalización es muy limitada o inexistente, funcionan como "caja negra" sin que entiendas la lógica interna, suelen tener límites diarios de búsquedas, y requieren **múltiples suscripciones** si quieres cubrir varios asset classes (30-200€/mes por plataforma).
+Los screeners disponibles en internet (gratuitos o de pago) tienen **limitaciones importantes**: normalmente ofrecen entre 500 y 3,000 acciones (principalmente USA), con 20 a 80 métricas predefinidas. No tienes acceso a datos históricos completos, dependes completamente de sus actualizaciones, la personalización es muy limitada o inexistente, funcionan como "caja negra" sin que entiendas la lógica interna, suelen tener límites diarios de búsquedas, y requieren suscripciones mensuales que van de 30€ a 200€/mes.
 
-### Tu Propio Sistema Multi-Asset
+### Tu Propio Sistema
 
-Con lo que aprenderás en este seminario construirás un sistema con **162,985 instrumentos** de **4 asset classes** (30-50x más cobertura que screeners típicos), **600+ métricas promedio** por instrumento, **análisis cross-asset** en una sola herramienta, **control total** sobre el dataset y actualizaciones, **personalización ilimitada** de filtros y criterios, código **open source** que puedes modificar y adaptar, **sin límites** de uso ni búsquedas, y **pago único** - el sistema es tuyo para siempre sin mensualidades.
+Con lo que aprenderás en este seminario construirás un sistema con **58,168 acciones** de **64 países** (10-20x más cobertura), **982 métricas** por acción (12-50x más profundidad analítica), **control total** sobre el dataset y actualizaciones, **personalización ilimitada** de filtros y criterios, código **open source** que puedes modificar y adaptar, **sin límites** de uso ni búsquedas, y **pago único** - el sistema es tuyo para siempre sin mensualidades.
 
-**Ventaja económica:** Para tener cobertura comparable necesitarías suscribirte a: screener de stocks (50€/mes) + screener de crypto (40€/mes) + datos de forex (30€/mes) + ETF analytics (40€/mes) = **160€/mes = 1,920€/año**. En su lugar, haces una **inversión única de 89€** y obtienes un sistema integrado que cubre todo.
+**Ventaja económica:** En lugar de pagar 30-50€/mes indefinidamente (360-600€/año), haces una **inversión única de 89€** y obtienes un sistema profesional que puedes usar, modificar y actualizar cuando quieras, sin depender de nadie.
 
-**Ventaja técnica:** Aprendes el proceso completo - no solo usas una herramienta, sino que entiendes cómo funciona y puedes adaptarla a tus necesidades específicas. Puedes agregar nuevas métricas, crear tus propias fórmulas, combinar indicadores de formas únicas, construir estrategias de screening cross-asset completamente personalizadas, y detectar correlaciones entre mercados que las plataformas separadas nunca mostrarían.
+**Ventaja técnica:** Aprendes el proceso completo - no solo usas una herramienta, sino que entiendes cómo funciona y puedes adaptarla a tus necesidades específicas. Puedes agregar nuevas métricas, crear tus propias fórmulas, combinar indicadores de formas únicas, y construir estrategias de screening completamente personalizadas.
 """)
 
 st.markdown("---")
@@ -327,29 +243,29 @@ st.markdown("---")
 st.markdown("""
 ## 🎓 Casos Prácticos Durante el Seminario
 
-Durante las 3 horas veremos ejemplos reales de estrategias de screening **tanto single-asset como cross-asset**:
+Durante las 3 horas veremos ejemplos reales de estrategias de screening:
 
-### Estrategias Single-Asset
+**Value Investing:** Filtrado de acciones infravaloradas usando P/E < 15, P/B < 1.5, ROE > 15%, Debt/Equity < 0.5, Piotroski F-Score > 7, Dividend Yield > 3%. Aprenderás a combinar múltiples ratios de valoración con métricas de calidad financiera.
 
-**Value Investing (Stocks):** Filtrado de acciones infravaloradas usando P/E < 15, P/B < 1.5, ROE > 15%, Debt/Equity < 0.5, Piotroski F-Score > 7, Dividend Yield > 3%. Aprenderás a combinar múltiples ratios de valoración con métricas de calidad financiera.
+**Growth Stocks:** Identificación de empresas de alto crecimiento con Revenue Growth > 20% YoY, EPS Growth > 25%, PEG Ratio < 1.5, Sloan Ratio < 0 (buena calidad de earnings), Strong momentum técnico (RSI, Moving Averages). Verás cómo filtrar empresas con crecimiento sostenible vs crecimiento artificial.
 
-**ETF Rotation Strategy:** Identificación de ETFs sectoriales con mejor momentum usando Performance 3M > 10%, AUM > $500M, Expense ratio < 0.5%, Fund flows positive, Beta 1Y > 1.2. Detectar rotaciones de capital entre sectores.
+**Quality Investing:** Selección de empresas con ROE > 20% consistente en múltiples años, Altman Z-Score > 3 (baja probabilidad de quiebra), Free Cash Flow Margin > 15%, Low volatility (Beta < 1), Continuous dividends. Aprenderás a construir filtros que priorizan la solidez financiera sobre el crecimiento agresivo.
 
-**Crypto Momentum:** Selección de cryptos con alto volumen y momentum: 24h volume > $1M, DEX liquidity > $500K, RSI entre 50-70, Price > SMA20 y SMA50, Buyers 24h > Sellers 24h. Filtrar tokens con tracción real vs pump & dump.
+**Dividend Aristocrats:** Búsqueda de empresas con dividendos crecientes y sostenibles usando Dividend Yield > 2%, Continuous Dividend Growth > 5 años, Payout Ratio < 60%, FCF to Dividend ratio > 1.5, Positive revenue growth.
 
-**Forex Technical Breakout:** Pares de divisas cerca de niveles técnicos clave: Price near 52-week high, ADX > 25 (strong trend), MACD bullish crossover, Volume > average 30d, Major currency pairs only. Capturas breakouts con confirmación técnica.
-
-### Estrategias Cross-Asset
-
-**Risk-On / Risk-Off Detector:** Compara performance de: Growth stocks vs Value stocks, High-yield bonds ETFs vs Treasury ETFs, Emerging market currencies vs Safe haven currencies (JPY, CHF, USD), Crypto vs Gold ETFs. Identifica el sentimiento general del mercado.
-
-**Sector Rotation Cross-Market:** Encuentra sectores ganadores simultáneamente en: US stocks de ese sector, ETFs sectoriales correspondientes, Related crypto tokens (ej: DeFi tokens si finance está fuerte). Valida tendencias cuando múltiples asset classes confirman.
-
-**Inflation Hedge Portfolio:** Screener que combina: Commodities ETFs con positive momentum, REITs con dividend yield > 4%, Gold & Silver positions, Inflation-protected bonds ETFs, Crypto con baja correlación (potential store of value). Construcción automática de portfolio anti-inflación.
-
-**Volatility Arbitrage:** Detecta discrepancias de volatilidad: Stocks con volatility < 20% pero sector ETF con volatility > 30%, Crypto con RSI < 30 mientras sector DeFi está sobrevalorado, Forex pairs con diverging volatilities. Oportunidades de trading basadas en mean reversion.
+**Technical Momentum:** Screening basado en señales técnicas como Golden Cross (SMA50 > SMA200), RSI entre 50-70 (momentum positivo sin sobreventa), MACD bullish crossover, Price above all major MAs, Volume > average 60 días.
 
 Cada estrategia incluye el código completo, la lógica de filtrado, y la interpretación de resultados.
+""")
+
+st.markdown("---")
+
+st.markdown("""
+## 🔧 Stack Tecnológico
+
+El seminario utiliza **Python** como lenguaje principal con las siguientes librerías: **Pandas** y **NumPy** para manipulación y análisis de datos, **Requests** para peticiones HTTP a APIs, **BeautifulSoup** y **Selenium** para scraping web cuando es necesario, **Plotly** y **Matplotlib** para visualizaciones, **TALib** para indicadores técnicos avanzados, y **Scikit-learn** para análisis estadístico.
+
+No necesitas experiencia previa con todas estas librerías - te explicaré cada una durante el seminario. Solo necesitas conocimientos básicos de Python (variables, loops, funciones) y familiaridad con Pandas (deseable pero no obligatorio). El nivel es **intermedio-avanzado** pero estructurado para que cualquiera con bases de Python pueda seguirlo.
 """)
 
 st.markdown("---")
@@ -359,25 +275,29 @@ st.markdown("""
 
 Con tu inscripción al seminario recibes:
 
-### Código Fuente Completo Multi-Asset
-- Scripts de scraping documentados para cada asset class
-- Pipeline ETL profesional unificado con manejo de errores
-- Módulos de análisis específicos y compartidos entre assets
-- Funciones de screening cross-asset
+### Código Fuente Completo
+- Scripts de scraping documentados línea por línea
+- Pipeline ETL profesional con manejo de errores
+- Módulos de análisis y filtrado reutilizables
+- Notebooks Jupyter con explicaciones detalladas
+- Funciones de visualización y reporting
 
-### Cuatro Bases de Datos Completas
-- **Stocks:** CSV con 58,168 acciones y 982 métricas
-- **ETFs:** CSV con 30,167 fondos y 202 métricas
-- **Crypto:** CSV con 67,476 criptomonedas y 421 métricas
-- **Forex:** CSV con 7,174 pares y 379 métricas
-- Diccionario de datos completo (explicación de cada métrica por asset class)
+### Base de Datos
+- CSV con las 58,168 acciones y 982 métricas
+- Diccionario de datos completo (explicación de cada métrica)
 - Scripts de actualización para refrescar los datos
 
-### Grabación Completa
+### Documentación
+- Guía técnica de 50+ páginas sobre todas las métricas
+- Estrategias de screening con ejemplos de código
+- 10 casos de estudio reales completamente resueltos
+- Best practices para scraping a gran escala
+- Troubleshooting guide con soluciones a problemas comunes
+
+### Grabación
 - Acceso ilimitado a la grabación del seminario
 - Puedes revisarla las veces que necesites
 - Transcripción con timestamps para búsqueda rápida
-- Material complementario descargable
 """)
 
 st.markdown("---")
@@ -405,7 +325,7 @@ with col1:
     
     **Nivel:** Intermedio-Avanzado (requiere Python básico)
     
-    **Requisitos técnicos:** Ordenador con Python 3.8+ instalado, conexión a internet estable, 4GB RAM mínimo, 2GB espacio libre (para las bases de datos)
+    **Requisitos técnicos:** Ordenador con Python 3.8+ instalado, conexión a internet estable, 4GB RAM mínimo
     
     **Soporte:** Grupo privado para resolver dudas post-seminario durante 30 días
     """)
@@ -422,10 +342,10 @@ with col2:
         <strong>✓ Acceso inmediato al material preparatorio</strong><br>
         ✓ Seminario en vivo de 3 horas<br>
         ✓ Grabación para siempre<br>
-        ✓ Todo el código fuente multi-asset<br>
-        ✓ 4 bases de datos completas (162K+ instrumentos)<br>
-        ✓ Documentación técnica (80+ páginas)<br>
-        ✓ 15 casos prácticos resueltos<br>
+        ✓ Todo el código fuente<br>
+        ✓ Base de datos completa (58K acciones)<br>
+        ✓ Documentación técnica (50+ páginas)<br>
+        ✓ 10 casos prácticos resueltos<br>
         ✓ Soporte 30 días post-seminario
     </div>
     """, unsafe_allow_html=True)
@@ -436,13 +356,55 @@ st.markdown("""
 ## 👥 ¿Para Quién Es Este Seminario?
 
 **Perfecto para ti si:**
-- Eres **inversor multi-asset** que quiere analizar stocks, ETFs, crypto y forex en un solo lugar
-- Trabajas como **analista financiero** o **trader** y necesitas herramientas más potentes
-- Eres **gestor de carteras** diversificadas buscando automatizar la selección
-- Te interesa el **trading cuantitativo** en múltiples mercados
-- Quieres **independencia** de plataformas y **control total** sobre tus datos
-- Necesitas analizar **miles de instrumentos** de forma rápida y eficiente
-- Buscas detectar **correlaciones cross-asset** que otros no ven
-- Quieres crear **estrategias personalizadas** únicas en el mercado
+- Eres **inversor** o **trader** que quiere sistematizar el análisis de acciones con datos objetivos
+- Trabajas como **analista financiero** y necesitas herramientas más potentes que los screeners comerciales
+- Eres **gestor de carteras** buscando automatizar la selección de valores
+- Estudiaste **finanzas** o **economía** y quieres adquirir skills técnicos muy demandados
+- Te interesa el **análisis cuantitativo** y quieres construir tus propias herramientas
+- Quieres **independencia** de plataformas de terceros y control total sobre tus datos
+- Necesitas analizar **cientos de acciones** de forma rápida y eficiente
+- Buscas crear **estrategias de screening personalizadas** que otros no tienen
+
+**Requisitos previos:**
+- Python básico: debes saber qué son variables, listas, diccionarios, loops (for/while), funciones, y cómo importar librerías
+- Conocimientos de finanzas: entender qué es P/E ratio, ROE, Free Cash Flow, deuda, márgenes - conceptos básicos
+- Familiaridad con Pandas es un plus pero no obligatorio (te explicaré lo necesario)
+- Ganas de aprender, practicar y hacer preguntas
+
+**No es para ti si:**
+- No tienes ninguna experiencia con Python (necesitas al menos lo básico)
+- Buscas un curso de "introducción a las finanzas" - asumimos que entiendes los conceptos fundamentales
+- Quieres una solución "click and go" sin entender cómo funciona - aquí construimos desde cero
+- No estás dispuesto a invertir tiempo en practicar después del seminario
+""")
 
 st.markdown("---")
+
+st.markdown("""
+<div style='text-align: center; padding: 50px 20px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 255, 170, 0.1)); border-radius: 15px; margin: 40px 0;'>
+    <h2 style='color: #00d4ff; font-size: 2.5rem; margin-bottom: 20px;'>
+        🚀 De Análisis Manual a Sistema Profesional en 3 Horas
+    </h2>
+    <p style='font-size: 1.3rem; color: #ffffff; line-height: 1.8; max-width: 900px; margin: 20px auto;'>
+        Deja de depender de screeners limitados que te cobran cada mes.<br>
+        Deja de analizar manualmente 5-10 acciones con métricas básicas.<br><br>
+        Construye tu propio sistema con <strong style='color: #00ffaa;'>58,168 acciones</strong> de <strong style='color: #00ffaa;'>64 países</strong> 
+        y <strong style='color: #00ffaa;'>982 métricas</strong> por acción.<br><br>
+        <strong style='color: #00d4ff;'>Control total. Personalización ilimitada. Tuyo para siempre.</strong>
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("---")
+
+st.markdown("""
+<div style='text-align: center; padding: 30px;'>
+    <p style='font-size: 1.2rem; color: #00d4ff; margin-bottom: 15px;'>
+        💡 <strong>No más decisiones por rumores. Invierte con DATOS.</strong>
+    </p>
+    <p style='font-size: 1rem; color: #888; margin-top: 20px;'>
+        © 2024 BQuant Finance | Stock Screener Masterclass<br>
+        Para más información: <strong style='color: #00ffaa;'>@Gsnchez</strong> | bquantfinance.com
+    </p>
+</div>
+""", unsafe_allow_html=True)
