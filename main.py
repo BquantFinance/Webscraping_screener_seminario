@@ -355,16 +355,6 @@ Cada estrategia incluye el código completo, la lógica de filtrado, y la interp
 st.markdown("---")
 
 st.markdown("""
-## 🔧 Stack Tecnológico
-
-El seminario utiliza **Python** como lenguaje principal con las siguientes librerías: **Pandas** y **NumPy** para manipulación y análisis de datos multi-asset, **Requests** para peticiones HTTP a APIs, **BeautifulSoup** y **Selenium** para scraping web cuando es necesario, **Plotly** y **Matplotlib** para visualizaciones cross-asset, **TALib** para indicadores técnicos avanzados, y **Scikit-learn** para análisis estadístico y correlaciones.
-
-No necesitas experiencia previa con todas estas librerías - te explicaré cada una durante el seminario. Solo necesitas conocimientos básicos de Python (variables, loops, funciones) y familiaridad con Pandas (deseable pero no obligatorio). El nivel es **intermedio-avanzado** pero estructurado para que cualquiera con bases de Python pueda seguirlo.
-""")
-
-st.markdown("---")
-
-st.markdown("""
 ## 🎁 Material Incluido
 
 Con tu inscripción al seminario recibes:
@@ -374,8 +364,6 @@ Con tu inscripción al seminario recibes:
 - Pipeline ETL profesional unificado con manejo de errores
 - Módulos de análisis específicos y compartidos entre assets
 - Funciones de screening cross-asset
-- Notebooks Jupyter con explicaciones detalladas por categoría
-- Sistema de correlación entre asset classes
 
 ### Cuatro Bases de Datos Completas
 - **Stocks:** CSV con 58,168 acciones y 982 métricas
@@ -384,14 +372,6 @@ Con tu inscripción al seminario recibes:
 - **Forex:** CSV con 7,174 pares y 379 métricas
 - Diccionario de datos completo (explicación de cada métrica por asset class)
 - Scripts de actualización para refrescar los datos
-
-### Documentación Extensiva
-- Guía técnica de 80+ páginas sobre todas las métricas
-- Estrategias de screening single-asset y cross-asset
-- 15 casos de estudio reales completamente resueltos
-- Best practices para scraping multi-source
-- Guía de correlaciones históricas entre asset classes
-- Troubleshooting guide con soluciones a problemas comunes
 
 ### Grabación Completa
 - Acceso ilimitado a la grabación del seminario
@@ -465,20 +445,6 @@ st.markdown("""
 - Buscas detectar **correlaciones cross-asset** que otros no ven
 - Quieres crear **estrategias personalizadas** únicas en el mercado
 
-**Requisitos previos:**
-- Python básico: debes saber qué son variables, listas, diccionarios, loops (for/while), funciones, y cómo importar librerías
-- Conocimientos de finanzas: entender conceptos básicos de valoración, análisis técnico, y diferentes asset classes
-- Familiaridad con Pandas es un plus pero no obligatorio (te explicaré lo necesario)
-- Ganas de aprender, practicar y hacer preguntas
-
-**No es para ti si:**
-- No tienes ninguna experiencia con Python (necesitas al menos lo básico)
-- Buscas un curso de "introducción a las finanzas" - asumimos que entiendes los conceptos fundamentales
-- Quieres una solución "click and go" sin entender cómo funciona - aquí construimos desde cero
-- No estás dispuesto a invertir tiempo en practicar después del seminario
-- Solo te interesa un único asset class y no quieres visión multi-mercado
-""")
-
 st.markdown("---")
 
 st.markdown("""
@@ -487,9 +453,6 @@ st.markdown("""
         🚀 Un Sistema Universal Para Todos los Mercados
     </h2>
     <p style='font-size: 1.3rem; color: #ffffff; line-height: 1.8; max-width: 900px; margin: 20px auto;'>
-        Deja de usar 4 plataformas diferentes que te cobran cada mes.<br>
-        Deja de analizar manualmente instrumentos con información fragmentada.<br><br>
-        Construye un sistema único que analiza:<br>
         <strong style='color: #00d4ff;'>58,168 Stocks</strong> • 
         <strong style='color: #00ffaa;'>30,167 ETFs</strong> • 
         <strong style='color: #ffaa00;'>67,476 Crypto</strong> • 
@@ -504,9 +467,6 @@ st.markdown("---")
 
 st.markdown("""
 <div style='text-align: center; padding: 30px;'>
-    <p style='font-size: 1.2rem; color: #00d4ff; margin-bottom: 15px;'>
-        💡 <strong>No más decisiones por rumores. Invierte con DATOS en cualquier mercado.</strong>
-    </p>
     <p style='font-size: 1rem; color: #888; margin-top: 20px;'>
         © 2026 BQuant Finance | Financial Screener Masterclass<br>
         Para más información: <strong style='color: #00ffaa;'>@Gsnchez</strong> | bquantfinance.com
