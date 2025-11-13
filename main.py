@@ -356,31 +356,3 @@ st.markdown("""
     <p class='urgency-text' style='margin-top: 20px;'>&#128197; Próxima fecha disponible</p>
 </div>
 """, unsafe_allow_html=True)
-
-# Extra flashy reminder
-st.markdown("""
-<div style='text-align: center; margin: 40px 0; padding: 40px; background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 170, 0, 0.2)); border-radius: 20px; border: 2px solid #ffaa00;'>
-    <p style='font-size: 2rem; font-weight: 900; color: #ffaa00; margin-bottom: 15px;'>
-        &#11088; ÚLTIMA OPORTUNIDAD &#11088;
-    </p>
-    <p style='font-size: 1.4rem; color: #ffffff; line-height: 1.8;'>
-        Construye tu propio sistema de screening profesional<br>
-        <span style='color: #00ffaa; font-weight: 800;'>162,985 instrumentos</span> &bull; 
-        <span style='color: #00d4ff; font-weight: 800;'>4 asset classes</span> &bull; 
-        <span style='color: #ffaa00; font-weight: 800;'>Control total</span><br><br>
-        <strong style='font-size: 1.6rem; color: #ffaa00;'>Solo 89€</strong>
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-# Footer
-st.markdown("""
-<div style='text-align: center; margin: 50px 0; padding: 40px;'>
-    <p style='font-size: 1.5rem; color: #00d4ff; font-weight: 700;'>
-        &#128640; De análisis manual a sistema profesional en 3 horas
-    </p>
-    <p style='font-size: 1.1rem; color: #888; margin-top: 30px;'>
-        &copy; 2024 BQuant Finance | @Gsnchez | bquantfinance.com
-    </p>
-</div>
-""", unsafe_allow_html=True)
