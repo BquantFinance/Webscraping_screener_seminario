@@ -276,7 +276,6 @@ st.markdown("""
     <a href='https://bquantfinance.com/courses/seminario-scraping-screener/' target='_blank' class='cta-button'>
         &#128293;&#128293; INSCRÍBETE AHORA &#128293;&#128293;
     </a>
-    <p class='urgency-text' style='margin-top: 20px;'>&#9201; Última oportunidad</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -379,7 +378,7 @@ with col5:
             Sin personalización<br>
             Caja negra<br><br>
             <span style='font-size: 1.5rem; font-weight: 800; color: #ff6b6b;'>
-                160€/mes = 1,920€/año
+                XX€/mes
             </span>
         </div>
     </div>
@@ -407,9 +406,9 @@ st.markdown("""
 <div class='benefit-box'>
     <div class='benefit-title'>&#128295; Web Scraping + Screening = Ventaja Competitiva</div>
     <div class='benefit-text'>
-        <strong style='color: #00d4ff;'>Web Scraping:</strong> Extrae datos que otros no tienen acceso<br>
-        <strong style='color: #00ffaa;'>Screening:</strong> Filtra 162K instrumentos en segundos<br>
-        <strong style='color: #ffaa00;'>Combinación:</strong> Sistema único que nadie más tiene<br><br>
+        <strong style='color: #00d4ff;'>Web Scraping:</strong> Extrae datos que otros no tienen.<br>
+        <strong style='color: #00ffaa;'>Screening:</strong> Filtra 162K instrumentos.<br>
+        <strong style='color: #ffaa00;'>Combinación:</strong> Sistema único.<br><br>
         <span class='highlight'>Detecta oportunidades antes que el mercado</span>
     </div>
 </div>
@@ -426,8 +425,6 @@ st.markdown("""
         &#9989; 4 bases de datos completas (162K+ instrumentos)<br>
         &#9989; Todo el código fuente documentado<br>
         &#9989; Pipeline ETL profesional<br>
-        &#9989; 15 casos prácticos resueltos<br>
-        &#9989; Soporte 30 días
     </div>
 </div>
 """, unsafe_allow_html=True)
