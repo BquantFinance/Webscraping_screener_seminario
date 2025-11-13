@@ -450,8 +450,6 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; padding: 50px 20px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 255, 170, 0.1)); border-radius: 15px; margin: 40px 0;'>
     <h2 style='color: #00d4ff; font-size: 2.5rem; margin-bottom: 20px;'>
-        🚀 Un Sistema Universal Para Todos los Mercados
-    </h2>
     <p style='font-size: 1.3rem; color: #ffffff; line-height: 1.8; max-width: 900px; margin: 20px auto;'>
         <strong style='color: #00d4ff;'>58,168 Stocks</strong> • 
         <strong style='color: #00ffaa;'>30,167 ETFs</strong> • 
