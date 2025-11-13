@@ -136,6 +136,57 @@ st.markdown("""
         color: #00ffaa;
         font-weight: 800;
     }
+    
+    .cta-button {
+        display: block;
+        background: linear-gradient(135deg, #ff6b00, #ffaa00, #ff6b00);
+        background-size: 200% 200%;
+        color: #000000;
+        font-size: 2rem;
+        font-weight: 900;
+        text-align: center;
+        padding: 30px 60px;
+        border-radius: 50px;
+        text-decoration: none;
+        margin: 50px auto;
+        max-width: 600px;
+        box-shadow: 0 15px 50px rgba(255, 170, 0, 0.5);
+        animation: gradient-shift 3s ease infinite, pulse 2s ease-in-out infinite;
+        border: 3px solid #ffaa00;
+        transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 20px 60px rgba(255, 170, 0, 0.8);
+        text-decoration: none;
+        color: #000000;
+    }
+    
+    @keyframes gradient-shift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes pulse {
+        0%, 100% { box-shadow: 0 15px 50px rgba(255, 170, 0, 0.5); }
+        50% { box-shadow: 0 15px 70px rgba(255, 170, 0, 0.9); }
+    }
+    
+    .urgency-text {
+        text-align: center;
+        font-size: 1.3rem;
+        color: #ffaa00;
+        font-weight: 700;
+        margin: 20px 0;
+        animation: blink 2s ease-in-out infinite;
+    }
+    
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -158,8 +209,8 @@ with col1:
         <div class='asset-label'>64 Países | 90 Exchanges</div>
         <div class='asset-metrics'>982 métricas/acción</div>
         <div class='asset-label' style='margin-top: 15px; font-size: 0.95rem;'>
-            Fundamental • Técnico • Calidad<br>
-            Piotroski • Altman Z-Score • Sloan Ratio
+            Fundamental &bull; Técnico &bull; Calidad<br>
+            Piotroski &bull; Altman Z-Score &bull; Sloan Ratio
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -174,8 +225,8 @@ with col2:
         <div class='asset-label'>Todas las categorías y regiones</div>
         <div class='asset-metrics'>202 métricas/fondo</div>
         <div class='asset-label' style='margin-top: 15px; font-size: 0.95rem;'>
-            AUM • Expense Ratio • Fund Flows<br>
-            NAV Performance • Holdings
+            AUM &bull; Expense Ratio &bull; Fund Flows<br>
+            NAV Performance &bull; Holdings
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -192,8 +243,8 @@ with col3:
         <div class='asset-label'>CEX + DEX | Todas las blockchains</div>
         <div class='asset-metrics'>421 métricas/crypto</div>
         <div class='asset-label' style='margin-top: 15px; font-size: 0.95rem;'>
-            DEX Analytics • On-chain • Market Cap<br>
-            Liquidity • Volume 24h
+            DEX Analytics &bull; On-chain &bull; Market Cap<br>
+            Liquidity &bull; Volume 24h
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -205,11 +256,11 @@ with col4:
         <div class='asset-title'>FOREX</div>
         <div class='asset-stat'>7,174</div>
         <div class='asset-label'>Pares de Divisas</div>
-        <div class='asset-label'>Majors • Minors • Exotics</div>
+        <div class='asset-label'>Majors &bull; Minors &bull; Exotics</div>
         <div class='asset-metrics'>379 métricas/par</div>
         <div class='asset-label' style='margin-top: 15px; font-size: 0.95rem;'>
             Análisis Técnico Completo<br>
-            Bid-Ask Spread • Volatility
+            Bid-Ask Spread &bull; Volatility
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -292,6 +343,33 @@ st.markdown("""
         &#9989; 15 casos prácticos resueltos<br>
         &#9989; Soporte 30 días
     </div>
+</div>
+""", unsafe_allow_html=True)
+
+# CTA Button - FLASHY!
+st.markdown("""
+<div style='text-align: center; margin: 60px 0;'>
+    <p class='urgency-text'>&#9889; PLAZAS LIMITADAS &#9889;</p>
+    <a href='https://bquantfinance.com/courses/seminario-scraping-screener/' target='_blank' class='cta-button'>
+        &#128293; INSCRÍBETE AHORA &#128293;
+    </a>
+    <p class='urgency-text' style='margin-top: 20px;'>&#128197; Próxima fecha disponible</p>
+</div>
+""", unsafe_allow_html=True)
+
+# Extra flashy reminder
+st.markdown("""
+<div style='text-align: center; margin: 40px 0; padding: 40px; background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 170, 0, 0.2)); border-radius: 20px; border: 2px solid #ffaa00;'>
+    <p style='font-size: 2rem; font-weight: 900; color: #ffaa00; margin-bottom: 15px;'>
+        &#11088; ÚLTIMA OPORTUNIDAD &#11088;
+    </p>
+    <p style='font-size: 1.4rem; color: #ffffff; line-height: 1.8;'>
+        Construye tu propio sistema de screening profesional<br>
+        <span style='color: #00ffaa; font-weight: 800;'>162,985 instrumentos</span> &bull; 
+        <span style='color: #00d4ff; font-weight: 800;'>4 asset classes</span> &bull; 
+        <span style='color: #ffaa00; font-weight: 800;'>Control total</span><br><br>
+        <strong style='font-size: 1.6rem; color: #ffaa00;'>Solo 89€</strong>
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
